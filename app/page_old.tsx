@@ -1,7 +1,6 @@
 import NewsletterForm, {
   type NewsletterState,
 } from "./_components/newsletter-form";
-import { ThemeToggle } from "./_components/theme-toggle";
 
 async function subscribeAction(
   _prev: NewsletterState,
@@ -10,7 +9,6 @@ async function subscribeAction(
   "use server";
 
   const email = formData.get("email")?.toString().trim().toLowerCase();
-
   if (!email) return { status: "error", message: "Email is required" };
 
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -29,12 +27,7 @@ async function subscribeAction(
 
   try {
     const { supabaseServer } = await import("@/lib/supabase/server");
-
-    // Insert or update subscriber (auto-confirmed)
-    // Basic geo hint from request headers (best-effort; refine with edge functions if needed)
-    // For now location is optional text stored once per email.
     const location = formData.get("location")?.toString().slice(0, 120) || null;
-
     const { error } = await supabaseServer
       .from("newsletter_subscribers")
       .upsert(
@@ -65,65 +58,57 @@ async function subscribeAction(
     };
   }
 
-  return {
-    status: "success",
-    message: "Thanks! You're subscribed to updates.",
-  };
+  return { status: "success", message: "Thanks! You’re on the list." };
 }
 
 export default function Home() {
   const videoSrc = process.env.NEXT_PUBLIC_HERO_VIDEO_URL || "/hero.mp4";
   return (
-    <div className="min-h-dvh bg-white text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100">
-      {/* Theme Toggle - Fixed Top Right */}
-      <div className="fixed right-4 top-[calc(env(safe-area-inset-top)+1rem)] z-50">
-        <ThemeToggle />
-      </div>
-
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="mx-auto flex max-w-5xl flex-col gap-10 px-5 pb-20 pt-24 sm:px-6 sm:pt-28 md:flex-row md:items-center">
+      <section className="mx-auto flex max-w-5xl flex-col gap-10 px-6 pb-24 pt-32 md:flex-row md:items-center">
         <div className="flex-1 space-y-6">
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
             Hi, I&#39;m Maninder.
           </h1>
-          <p className="max-w-xl text-lg text-zinc-600 dark:text-zinc-300">
+          <p className="max-w-xl text-lg text-zinc-600">
             I build iOS & Android apps, love exploring new places, and hit the
             road as a runner. This is my digital basecamp—projects, journeys,
             and things I&#39;m learning.
           </p>
           <div className="flex flex-wrap gap-3">
-            <span className="rounded-full bg-zinc-900 px-4 py-1 text-sm font-medium text-white dark:bg-zinc-100 dark:text-zinc-900">
+            <span className="rounded-full bg-zinc-900 px-4 py-1 text-sm font-medium text-white">
               Mobile Dev
             </span>
-            <span className="rounded-full bg-zinc-100 px-4 py-1 text-sm font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-200">
+            <span className="rounded-full bg-zinc-100 px-4 py-1 text-sm font-medium text-zinc-700">
               Traveler
             </span>
-            <span className="rounded-full bg-zinc-100 px-4 py-1 text-sm font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-200">
+            <span className="rounded-full bg-zinc-100 px-4 py-1 text-sm font-medium text-zinc-700">
               Runner
             </span>
           </div>
           <div className="flex gap-4 pt-2">
             <a
               href="https://github.com/maninder-mike"
-              className="text-sm font-medium text-zinc-700 underline decoration-zinc-300 underline-offset-4 hover:text-black dark:text-zinc-300 dark:decoration-zinc-700 dark:hover:text-white"
+              className="text-sm font-medium text-zinc-700 underline decoration-zinc-300 underline-offset-4 hover:text-black"
             >
               GitHub
             </a>
             <a
               href="https://x.com/maninder_mike"
-              className="text-sm font-medium text-zinc-700 underline decoration-zinc-300 underline-offset-4 hover:text-black dark:text-zinc-300 dark:decoration-zinc-700 dark:hover:text-white"
+              className="text-sm font-medium text-zinc-700 underline decoration-zinc-300 underline-offset-4 hover:text-black"
             >
               X / Twitter
             </a>
             <a
               href="https://www.linkedin.com/in/maninder-mike/"
-              className="text-sm font-medium text-zinc-700 underline decoration-zinc-300 underline-offset-4 hover:text-black dark:text-zinc-300 dark:decoration-zinc-700 dark:hover:text-white"
+              className="text-sm font-medium text-zinc-700 underline decoration-zinc-300 underline-offset-4 hover:text-black"
             >
               LinkedIn
             </a>
             <a
               href="https://instagram.com/"
-              className="text-sm font-medium text-zinc-700 underline decoration-zinc-300 underline-offset-4 hover:text-black dark:text-zinc-300 dark:decoration-zinc-700 dark:hover:text-white"
+              className="text-sm font-medium text-zinc-700 underline decoration-zinc-300 underline-offset-4 hover:text-black"
             >
               Instagram
             </a>
@@ -148,15 +133,12 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="mx-auto max-w-5xl px-5 py-14 sm:px-6">
+      <section id="projects" className="mx-auto max-w-5xl px-6 py-16">
         <div className="mb-10 flex items-end justify-between">
           <h2 className="text-2xl font-semibold tracking-tight">
             Selected Projects
           </h2>
-          <a
-            href="#"
-            className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
-          >
+          <a href="#" className="text-sm text-zinc-600 hover:text-zinc-900">
             View all
           </a>
         </div>
@@ -180,19 +162,17 @@ export default function Home() {
           ].map((p) => (
             <div
               key={p.title}
-              className="group rounded-xl border border-zinc-200 bg-white p-5 transition hover:border-zinc-300 hover:shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700"
+              className="group rounded-xl border border-zinc-200 p-5 transition hover:border-zinc-300 hover:shadow-sm"
             >
-              <h3 className="mb-2 text-lg font-medium group-hover:text-black dark:group-hover:text-white">
+              <h3 className="mb-2 text-lg font-medium group-hover:text-black">
                 {p.title}
               </h3>
-              <p className="mb-4 text-sm text-zinc-600 dark:text-zinc-300">
-                {p.description}
-              </p>
+              <p className="mb-4 text-sm text-zinc-600">{p.description}</p>
               <div className="flex flex-wrap gap-2">
                 {p.stack.map((s) => (
                   <span
                     key={s}
-                    className="rounded-md bg-zinc-100 px-2 py-1 text-xs text-zinc-700 dark:bg-zinc-800 dark:text-zinc-200"
+                    className="rounded-md bg-zinc-100 px-2 py-1 text-xs text-zinc-700"
                   >
                     {s}
                   </span>
@@ -204,7 +184,7 @@ export default function Home() {
       </section>
 
       {/* Travel Section */}
-      <section id="travel" className="mx-auto max-w-5xl px-5 py-14 sm:px-6">
+      <section id="travel" className="mx-auto max-w-5xl px-6 py-16">
         <h2 className="mb-8 text-2xl font-semibold tracking-tight">
           Travel Log
         </h2>
@@ -219,13 +199,11 @@ export default function Home() {
           ].map((place) => (
             <div
               key={place}
-              className="relative overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-900"
+              className="relative overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50 p-4"
             >
-              <div className="h-28 w-full rounded-md bg-linear-to-br from-zinc-200 to-zinc-100 dark:from-zinc-800 dark:to-zinc-700" />
-              <p className="mt-3 text-sm font-medium text-zinc-700 dark:text-zinc-200">
-                {place}
-              </p>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400">
+              <div className="h-28 w-full rounded-md bg-linear-to-br from-zinc-200 to-zinc-100" />
+              <p className="mt-3 text-sm font-medium text-zinc-700">{place}</p>
+              <p className="text-xs text-zinc-500">
                 Memories & photos coming soon.
               </p>
             </div>
@@ -234,11 +212,11 @@ export default function Home() {
       </section>
 
       {/* Running Section */}
-      <section id="running" className="mx-auto max-w-5xl px-5 py-14 sm:px-6">
+      <section id="running" className="mx-auto max-w-5xl px-6 py-16">
         <h2 className="mb-4 text-2xl font-semibold tracking-tight">
           Running Snapshot
         </h2>
-        <p className="mb-6 max-w-xl text-sm text-zinc-600 dark:text-zinc-300">
+        <p className="mb-6 max-w-xl text-sm text-zinc-600">
           Consistency {">"} Perfection. I&#39;ll wire this up later with real
           stats—weekly mileage, longest run, average pace and upcoming race
           goal.
@@ -251,12 +229,12 @@ export default function Home() {
           ].map((card) => (
             <div
               key={card.label}
-              className="rounded-xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900"
+              className="rounded-xl border border-zinc-200 bg-white p-5"
             >
-              <p className="text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+              <p className="text-xs uppercase tracking-wide text-zinc-500">
                 {card.label}
               </p>
-              <p className="mt-2 text-2xl font-semibold text-zinc-800 dark:text-zinc-100">
+              <p className="mt-2 text-2xl font-semibold text-zinc-800">
                 {card.value}
               </p>
             </div>
@@ -265,9 +243,9 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="mx-auto max-w-5xl px-5 py-14 sm:px-6">
+      <section id="about" className="mx-auto max-w-5xl px-6 py-16">
         <h2 className="mb-4 text-2xl font-semibold tracking-tight">About</h2>
-        <div className="prose max-w-none text-zinc-700 prose-p:leading-relaxed dark:prose-invert dark:text-zinc-300">
+        <div className="prose max-w-none text-zinc-700 prose-p:leading-relaxed">
           <p>
             I&#39;m a self-driven mobile developer focused on crafting fast,
             native experiences. I enjoy simplifying complex problems into easy
@@ -287,74 +265,60 @@ export default function Home() {
       </section>
 
       {/* Contact placeholder */}
-      <section id="contact" className="mx-auto max-w-5xl px-5 pb-20 sm:px-6">
+      <section id="contact" className="mx-auto max-w-5xl px-6 pb-24">
         <h2 className="mb-4 text-2xl font-semibold tracking-tight">Contact</h2>
-        <p className="max-w-xl text-sm text-zinc-600 dark:text-zinc-300">
+        <p className="max-w-xl text-sm text-zinc-600">
           Email & form coming soon. I&#39;ll integrate Resend + Supabase here
           for messaging and newsletter features.
         </p>
       </section>
 
       {/* Modern footer below */}
-      <footer className="mt-16 bg-zinc-50/80 dark:bg-zinc-950/70">
-        <div className="mx-auto max-w-6xl px-5 py-12 sm:px-6">
+      <footer className="mt-20 bg-zinc-50/80">
+        <div className="mx-auto max-w-6xl px-6 py-14">
           <div className="grid gap-10 md:grid-cols-4">
             <div className="space-y-3">
-              <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-                Maninder
-              </h3>
-              <p className="text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+              <h3 className="text-sm font-semibold text-zinc-900">Maninder</h3>
+              <p className="text-sm leading-6 text-zinc-600">
                 iOS/Android dev. Traveler. Runner. Crafting fast apps and
                 collecting miles.
               </p>
             </div>
             <div>
-              <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+              <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-500">
                 Navigation
               </h4>
-              <ul className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
+              <ul className="space-y-2 text-sm text-zinc-700">
                 <li>
-                  <a
-                    className="hover:text-black dark:hover:text-white"
-                    href="#projects"
-                  >
+                  <a className="hover:text-black" href="#projects">
                     Projects
                   </a>
                 </li>
                 <li>
-                  <a
-                    className="hover:text-black dark:hover:text-white"
-                    href="#travel"
-                  >
+                  <a className="hover:text-black" href="#travel">
                     Travel
                   </a>
                 </li>
                 <li>
-                  <a
-                    className="hover:text-black dark:hover:text-white"
-                    href="#running"
-                  >
+                  <a className="hover:text-black" href="#running">
                     Running
                   </a>
                 </li>
                 <li>
-                  <a
-                    className="hover:text-black dark:hover:text-white"
-                    href="#about"
-                  >
+                  <a className="hover:text-black" href="#about">
                     About
                   </a>
                 </li>
               </ul>
             </div>
             <div>
-              <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+              <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-500">
                 Social
               </h4>
-              <ul className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
+              <ul className="space-y-2 text-sm text-zinc-700">
                 <li>
                   <a
-                    className="hover:text-black dark:hover:text-white"
+                    className="hover:text-black"
                     href="https://github.com/maninder"
                     target="_blank"
                     rel="noreferrer"
@@ -364,7 +328,7 @@ export default function Home() {
                 </li>
                 <li>
                   <a
-                    className="hover:text-black dark:hover:text-white"
+                    className="hover:text-black"
                     href="https://x.com/"
                     target="_blank"
                     rel="noreferrer"
@@ -374,7 +338,7 @@ export default function Home() {
                 </li>
                 <li>
                   <a
-                    className="hover:text-black dark:hover:text-white"
+                    className="hover:text-black"
                     href="https://www.linkedin.com/in/"
                     target="_blank"
                     rel="noreferrer"
@@ -384,7 +348,7 @@ export default function Home() {
                 </li>
                 <li>
                   <a
-                    className="hover:text-black dark:hover:text-white"
+                    className="hover:text-black"
                     href="https://instagram.com/"
                     target="_blank"
                     rel="noreferrer"
@@ -395,16 +359,16 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+              <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-500">
                 Newsletter
               </h4>
-              <p className="mb-3 text-sm text-zinc-600 dark:text-zinc-300">
+              <p className="mb-3 text-sm text-zinc-600">
                 Get occasional updates about new projects and travel posts.
               </p>
               <NewsletterForm action={subscribeAction} />
             </div>
           </div>
-          <div className="mt-10 border-t border-zinc-200 pt-6 text-xs text-zinc-500 dark:border-zinc-800 dark:text-zinc-400">
+          <div className="mt-10 border-t border-zinc-200 pt-6 text-xs text-zinc-500">
             <p>© {new Date().getFullYear()} Maninder. Built in Canada 🇨🇦</p>
           </div>
         </div>
