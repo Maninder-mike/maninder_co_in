@@ -1,7 +1,9 @@
 import NewsletterForm, {
   type NewsletterState,
 } from "./_components/newsletter-form";
-import { ThemeToggle } from "./_components/theme-toggle";
+import { LogoAnimator } from "./_components/logo-animator";
+import { SiteCustomizer } from "./_components/site-customizer";
+import { getProjects, getPersonalBests, getTravelLogs } from "@/lib/supabase/queries";
 
 async function subscribeAction(
   _prev: NewsletterState,
@@ -30,9 +32,6 @@ async function subscribeAction(
   try {
     const { supabaseServer } = await import("@/lib/supabase/server");
 
-    // Insert or update subscriber (auto-confirmed)
-    // Basic geo hint from request headers (best-effort; refine with edge functions if needed)
-    // For now location is optional text stored once per email.
     const location = formData.get("location")?.toString().slice(0, 120) || null;
 
     const { error } = await supabaseServer
@@ -45,6 +44,7 @@ async function subscribeAction(
     if (error) {
       const code = (error as { code?: string }).code;
       const msg = error.message || "";
+
       if (
         code === "42P01" ||
         msg.toLowerCase().includes("newsletter_subscribers")
@@ -71,132 +71,121 @@ async function subscribeAction(
   };
 }
 
-export default function Home() {
-  const videoSrc = process.env.NEXT_PUBLIC_HERO_VIDEO_URL || "/hero.mp4";
-  return (
-    <div className="min-h-dvh bg-white text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100">
-      {/* Theme Toggle - Fixed Top Right */}
-      <div className="fixed right-4 top-[calc(env(safe-area-inset-top)+1rem)] z-50">
-        <ThemeToggle />
-      </div>
+export default async function Home() {
+  const projects = await getProjects(true);
+  const travelLogs = await getTravelLogs();
 
-      {/* Hero Section */}
-      <section className="mx-auto flex max-w-5xl flex-col gap-10 px-5 pb-20 pt-24 sm:px-6 sm:pt-28 md:flex-row md:items-center">
-        <div className="flex-1 space-y-6">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-            Hi, I&#39;m Maninder.
-          </h1>
-          <p className="max-w-xl text-lg text-zinc-600 dark:text-zinc-300">
-            I build iOS & Android apps, love exploring new places, and hit the
-            road as a runner. This is my digital basecamp—projects, journeys,
-            and things I&#39;m learning.
-          </p>
-          <div className="flex flex-wrap gap-3">
-            <span className="rounded-full bg-zinc-900 px-4 py-1 text-sm font-medium text-white dark:bg-zinc-100 dark:text-zinc-900">
-              Mobile Dev
-            </span>
-            <span className="rounded-full bg-zinc-100 px-4 py-1 text-sm font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-200">
-              Traveler
-            </span>
-            <span className="rounded-full bg-zinc-100 px-4 py-1 text-sm font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-200">
-              Runner
-            </span>
-          </div>
-          <div className="flex gap-4 pt-2">
-            <a
-              href="https://github.com/maninder-mike"
-              className="text-sm font-medium text-zinc-700 underline decoration-zinc-300 underline-offset-4 hover:text-black dark:text-zinc-300 dark:decoration-zinc-700 dark:hover:text-white"
-            >
-              GitHub
-            </a>
-            <a
-              href="https://x.com/maninder_mike"
-              className="text-sm font-medium text-zinc-700 underline decoration-zinc-300 underline-offset-4 hover:text-black dark:text-zinc-300 dark:decoration-zinc-700 dark:hover:text-white"
-            >
-              X / Twitter
-            </a>
-            <a
-              href="https://www.linkedin.com/in/maninder-mike/"
-              className="text-sm font-medium text-zinc-700 underline decoration-zinc-300 underline-offset-4 hover:text-black dark:text-zinc-300 dark:decoration-zinc-700 dark:hover:text-white"
-            >
-              LinkedIn
-            </a>
-            <a
-              href="https://instagram.com/"
-              className="text-sm font-medium text-zinc-700 underline decoration-zinc-300 underline-offset-4 hover:text-black dark:text-zinc-300 dark:decoration-zinc-700 dark:hover:text-white"
-            >
-              Instagram
-            </a>
+  return (
+    <div className="min-h-dvh bg-zinc-50 text-zinc-900 selection:bg-zinc-900 selection:text-white dark:bg-zinc-950 dark:text-zinc-100 dark:selection:bg-zinc-100 dark:selection:text-zinc-900">
+      {/* Background Grid */}
+      <div className="fixed inset-0 z-0 pointer-events-none bg-grid-pattern opacity-50"></div>
+
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-zinc-200 bg-white/80 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/80">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+          <LogoAnimator />
+          <div className="hidden gap-6 text-sm font-medium sm:flex">
+            <a href="#work" className="hover:text-zinc-600 dark:hover:text-zinc-300">Work</a>
+            <a href="#travel" className="hover:text-zinc-600 dark:hover:text-zinc-300">Travel</a>
+            <a href="#about" className="hover:text-zinc-600 dark:hover:text-zinc-300">About</a>
           </div>
         </div>
-        <div className="flex-1">
-          <div className="aspect-square w-full overflow-hidden rounded-2xl shadow-inner">
-            <video
-              className="h-full w-full object-cover"
-              muted
-              loop
-              autoPlay
-              playsInline
-              preload="metadata"
-              poster="/window.svg"
+      </nav>
+
+      {/* Hero Section */}
+      <section className="relative z-10 mx-auto flex min-h-[90vh] max-w-6xl flex-col justify-center px-6 pt-20">
+        <div className="max-w-3xl space-y-8">
+
+
+          <h1 className="text-6xl font-bold tracking-tighter sm:text-8xl">
+            Building digital <br />
+            <span className="text-gradient">
+              experiences.
+            </span>
+          </h1>
+
+          <p className="max-w-xl text-xl leading-relaxed text-zinc-600 dark:text-zinc-400">
+            I&apos;m Maninder, a mobile developer and traveler. I craft fast, native applications and explore the world one run at a time.
+          </p>
+
+          <div className="flex flex-wrap gap-4">
+            <a
+              href="#work"
+              className="inline-flex items-center justify-center rounded-full px-8 py-3 text-sm font-medium transition-transform hover:scale-105 hover:opacity-90"
+              style={{
+                backgroundColor: "var(--color-accent)",
+                color: "var(--color-accent-foreground)",
+              }}
             >
-              <source src={videoSrc} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+              View Work
+            </a>
+            <a
+              href="#about"
+              className="inline-flex items-center justify-center rounded-full border border-zinc-200 bg-white px-8 py-3 text-sm font-medium text-zinc-900 transition-transform hover:scale-105 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-white dark:hover:bg-zinc-800"
+            >
+              About Me
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section id="projects" className="mx-auto max-w-5xl px-5 py-14 sm:px-6">
-        <div className="mb-10 flex items-end justify-between">
-          <h2 className="text-2xl font-semibold tracking-tight">
-            Selected Projects
-          </h2>
-          <a
-            href="#"
-            className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
-          >
-            View all
-          </a>
+      {/* Scrolling Marquee */}
+      <div className="relative z-10 w-full overflow-hidden border-y border-zinc-200 bg-white py-4 dark:border-zinc-800 dark:bg-zinc-950">
+        <div className="flex animate-marquee whitespace-nowrap">
+          {[...Array(10)].map((_, i) => (
+            <span key={i} className="mx-8 text-4xl font-bold uppercase tracking-widest text-zinc-200 dark:text-zinc-800">
+              Developer • Traveler • Runner •
+            </span>
+          ))}
         </div>
-        <div className="grid gap-8 md:grid-cols-3">
-          {[
-            {
-              title: "Travel Tracker",
-              stack: ["Swift", "MapKit"],
-              description: "iOS app logging countries & cities visited.",
-            },
-            {
-              title: "Run Metrics",
-              stack: ["Kotlin", "Compose"],
-              description: "Android app for weekly mileage & pace trends.",
-            },
-            {
-              title: "CrossFit Timer",
-              stack: ["React Native"],
-              description: "Custom interval timer with workout presets.",
-            },
-          ].map((p) => (
+      </div>
+
+      {/* Selected Work (Bento Grid) */}
+      <section id="work" className="relative z-10 mx-auto max-w-6xl px-6 py-32">
+        <h2 className="mb-16 text-4xl font-bold tracking-tighter sm:text-5xl">Selected Work</h2>
+
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project, i) => (
             <div
-              key={p.title}
-              className="group rounded-xl border border-zinc-200 bg-white p-5 transition hover:border-zinc-300 hover:shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700"
+              key={project.id}
+              className={`glass group relative overflow-hidden rounded-3xl p-8 transition-all hover:border-zinc-300 hover:shadow-xl dark:hover:border-zinc-700 ${i === 0 ? "md:col-span-2 md:row-span-2" : ""
+                }`}
             >
-              <h3 className="mb-2 text-lg font-medium group-hover:text-black dark:group-hover:text-white">
-                {p.title}
-              </h3>
-              <p className="mb-4 text-sm text-zinc-600 dark:text-zinc-300">
-                {p.description}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {p.stack.map((s) => (
-                  <span
-                    key={s}
-                    className="rounded-md bg-zinc-100 px-2 py-1 text-xs text-zinc-700 dark:bg-zinc-800 dark:text-zinc-200"
-                  >
-                    {s}
-                  </span>
-                ))}
+              <div className="flex h-full flex-col justify-between space-y-8">
+                <div>
+                  <div className="mb-4 flex flex-wrap gap-2">
+                    {project.stack?.map((tech) => (
+                      <span key={tech} className="rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs font-medium text-zinc-600 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                  <h3 className="text-2xl font-bold group-hover:underline">{project.title}</h3>
+                  <p className="mt-2 text-zinc-600 dark:text-zinc-400">{project.description}</p>
+                </div>
+
+                <div className="flex items-center gap-4">
+                  {project.link && (
+                    <a
+                      href={project.link.startsWith('http') ? project.link : `https://${project.link}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-medium underline underline-offset-4"
+                    >
+                      View Live
+                    </a>
+                  )}
+                  {project.github_url && (
+                    <a
+                      href={project.github_url.startsWith('http') ? project.github_url : `https://${project.github_url}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
+                    >
+                      GitHub
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           ))}
@@ -204,208 +193,129 @@ export default function Home() {
       </section>
 
       {/* Travel Section */}
-      <section id="travel" className="mx-auto max-w-5xl px-5 py-14 sm:px-6">
-        <h2 className="mb-8 text-2xl font-semibold tracking-tight">
-          Travel Log
-        </h2>
-        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
-          {[
-            "Japan",
-            "Iceland",
-            "New Zealand",
-            "Italy",
-            "Canada",
-            "South Africa",
-          ].map((place) => (
-            <div
-              key={place}
-              className="relative overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-900"
+      <section id="travel" className="relative z-10 mx-auto max-w-6xl px-6 py-32">
+        <div className="mb-16 flex items-end justify-between">
+          <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl">Travel Log</h2>
+          <p className="hidden max-w-xs text-right text-sm text-zinc-500 sm:block">
+            Collecting stories and miles from around the globe.
+          </p>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {travelLogs.map((place) => (
+            <a
+              key={place.slug}
+              href={`/travel/${place.slug}`}
+              className="group relative aspect-[4/5] overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-900"
             >
-              <div className="h-28 w-full rounded-md bg-linear-to-br from-zinc-200 to-zinc-100 dark:from-zinc-800 dark:to-zinc-700" />
-              <p className="mt-3 text-sm font-medium text-zinc-700 dark:text-zinc-200">
-                {place}
-              </p>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                Memories & photos coming soon.
-              </p>
+              <div className={`absolute inset-0 ${place.cover_image} opacity-80 transition-all duration-500 group-hover:scale-110 group-hover:opacity-100`} />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-6 flex flex-col justify-end">
+                <h3 className="text-xl font-bold text-white">{place.title}</h3>
+                <span className="mt-2 inline-block translate-y-4 text-xs font-medium text-white/80 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                  View Gallery →
+                </span>
+              </div>
+            </a>
+          ))}
+          {travelLogs.length === 0 && (
+            <div className="col-span-full py-12 text-center text-zinc-500 dark:text-zinc-400">
+              No travel logs yet. Check back soon!
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Running Section (Achievements) */}
+      <section id="running" className="relative z-10 mx-auto max-w-6xl px-6 py-32">
+        <div className="mb-16 flex items-end justify-between">
+          <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl">
+            Personal Bests
+          </h2>
+          <p className="hidden max-w-xs text-right text-sm text-zinc-500 sm:block">
+            All-time records from my training logs.
+          </p>
+        </div>
+
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {(await getPersonalBests()).map((pb) => (
+            <div
+              key={pb.type}
+              className="glass group relative overflow-hidden rounded-3xl p-8 transition-all hover:-translate-y-1 hover:shadow-2xl"
+            >
+              <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-gradient-to-br from-zinc-100 to-zinc-50 opacity-50 blur-2xl transition-opacity group-hover:opacity-100 dark:from-zinc-800 dark:to-zinc-900" />
+
+              <div className="relative z-10">
+                <p className="text-xs font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
+                  {pb.distance_label}
+                </p>
+                <h3
+                  className="mt-4 text-4xl font-black tracking-tighter"
+                  style={{ color: "var(--color-accent)" }}
+                >
+                  {pb.time_str}
+                </h3>
+                <div className="mt-4 flex items-center gap-2">
+                  <span className="inline-flex items-center rounded-full border border-zinc-200 bg-white px-2 py-1 text-[10px] font-medium text-zinc-600 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+                    {pb.date_str}
+                  </span>
+                  {pb.type === "42k" && (
+                    <span className="inline-flex items-center rounded-full border border-yellow-200 bg-yellow-50 px-2 py-1 text-[10px] font-medium text-yellow-700 dark:border-yellow-900/50 dark:bg-yellow-900/20 dark:text-yellow-400">
+                      ★ Marathoner
+                    </span>
+                  )}
+                </div>
+              </div>
             </div>
           ))}
+          {(await getPersonalBests()).length === 0 && (
+            <div className="col-span-full py-12 text-center text-zinc-500 dark:text-zinc-400">
+              No personal bests logged yet.
+            </div>
+          )}
         </div>
       </section>
 
-      {/* Running Section */}
-      <section id="running" className="mx-auto max-w-5xl px-5 py-14 sm:px-6">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight">
-          Running Snapshot
-        </h2>
-        <p className="mb-6 max-w-xl text-sm text-zinc-600 dark:text-zinc-300">
-          Consistency {">"} Perfection. I&#39;ll wire this up later with real
-          stats—weekly mileage, longest run, average pace and upcoming race
-          goal.
-        </p>
-        <div className="grid gap-6 sm:grid-cols-3">
-          {[
-            { label: "Weekly Mileage", value: "-- km" },
-            { label: "Avg Pace", value: "-- /km" },
-            { label: "Longest Run", value: "-- km" },
-          ].map((card) => (
-            <div
-              key={card.label}
-              className="rounded-xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900"
-            >
-              <p className="text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-                {card.label}
-              </p>
-              <p className="mt-2 text-2xl font-semibold text-zinc-800 dark:text-zinc-100">
-                {card.value}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section id="about" className="mx-auto max-w-5xl px-5 py-14 sm:px-6">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight">About</h2>
-        <div className="prose max-w-none text-zinc-700 prose-p:leading-relaxed dark:prose-invert dark:text-zinc-300">
-          <p>
-            I&#39;m a self-driven mobile developer focused on crafting fast,
-            native experiences. I enjoy simplifying complex problems into easy
-            interfaces.
-          </p>
-          <p>
-            Outside code I chase sunrises, train for distance runs, and collect
-            stories from new places. Travel keeps my perspective fresh and
-            running keeps my mind clear.
-          </p>
-          <p>
-            This site will evolve—I&#39;ll add live run data, travel photo sets,
-            and a proper blog. For collaboration or ideas, reach me on any
-            platform above.
-          </p>
-        </div>
-      </section>
-
-      {/* Contact placeholder */}
-      <section id="contact" className="mx-auto max-w-5xl px-5 pb-20 sm:px-6">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight">Contact</h2>
-        <p className="max-w-xl text-sm text-zinc-600 dark:text-zinc-300">
-          Email & form coming soon. I&#39;ll integrate Resend + Supabase here
-          for messaging and newsletter features.
-        </p>
-      </section>
-
-      {/* Modern footer below */}
-      <footer className="mt-16 bg-zinc-50/80 dark:bg-zinc-950/70">
-        <div className="mx-auto max-w-6xl px-5 py-12 sm:px-6">
-          <div className="grid gap-10 md:grid-cols-4">
-            <div className="space-y-3">
-              <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-                Maninder
-              </h3>
-              <p className="text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-                iOS/Android dev. Traveler. Runner. Crafting fast apps and
-                collecting miles.
-              </p>
-            </div>
+      {/* Footer / Contact */}
+      <footer className="relative z-10 border-t border-zinc-200 bg-white py-24 dark:border-zinc-800 dark:bg-zinc-950">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="grid gap-12 lg:grid-cols-2">
             <div>
-              <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-                Navigation
-              </h4>
-              <ul className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
-                <li>
-                  <a
-                    className="hover:text-black dark:hover:text-white"
-                    href="#projects"
-                  >
-                    Projects
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="hover:text-black dark:hover:text-white"
-                    href="#travel"
-                  >
-                    Travel
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="hover:text-black dark:hover:text-white"
-                    href="#running"
-                  >
-                    Running
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="hover:text-black dark:hover:text-white"
-                    href="#about"
-                  >
-                    About
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-                Social
-              </h4>
-              <ul className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
-                <li>
-                  <a
-                    className="hover:text-black dark:hover:text-white"
-                    href="https://github.com/maninder"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    GitHub
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="hover:text-black dark:hover:text-white"
-                    href="https://x.com/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    X / Twitter
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="hover:text-black dark:hover:text-white"
-                    href="https://www.linkedin.com/in/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    LinkedIn
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="hover:text-black dark:hover:text-white"
-                    href="https://instagram.com/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Instagram
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-                Newsletter
-              </h4>
-              <p className="mb-3 text-sm text-zinc-600 dark:text-zinc-300">
-                Get occasional updates about new projects and travel posts.
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Stay in the loop.</h2>
+              <p className="mt-4 max-w-md text-zinc-600 dark:text-zinc-400">
+                Join my newsletter for occasional updates on new projects, travel stories, and tech insights. No spam, ever.
               </p>
-              <NewsletterForm action={subscribeAction} />
+              <div className="mt-8 max-w-md">
+                <NewsletterForm action={subscribeAction} />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-8 lg:pl-20">
+              <div>
+                <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-zinc-500">Socials</h3>
+                <ul className="space-y-3 text-sm">
+                  <li><a href="https://x.com/maninder_mike" className="hover:underline">Twitter / X</a></li>
+                  <li><a href="https://github.com/maninder-mike" className="hover:underline">GitHub</a></li>
+                  <li><a href="https://linkedin.com/in/maninder-mike" className="hover:underline">LinkedIn</a></li>
+                  <li><a href="https://instagram.com" className="hover:underline">Instagram</a></li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-zinc-500">Site</h3>
+                <ul className="space-y-3 text-sm">
+                  <li><a href="#work" className="hover:underline">Work</a></li>
+                  <li><a href="#travel" className="hover:underline">Travel</a></li>
+                  <li><a href="#about" className="hover:underline">About</a></li>
+                  <li className="pt-4">
+                    <SiteCustomizer />
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-          <div className="mt-10 border-t border-zinc-200 pt-6 text-xs text-zinc-500 dark:border-zinc-800 dark:text-zinc-400">
-            <p>© {new Date().getFullYear()} Maninder. Built in Canada 🇨🇦</p>
+
+          <div className="mt-24 flex flex-col items-center justify-between gap-4 border-t border-zinc-200 pt-8 text-sm text-zinc-500 sm:flex-row dark:border-zinc-800">
+            <p>© {new Date().getFullYear()} Maninder. All rights reserved.</p>
+            <p>Built in Canada 🇨🇦</p>
           </div>
         </div>
       </footer>

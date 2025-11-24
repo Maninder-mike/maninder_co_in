@@ -40,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* Responsive meta */}
         <meta
@@ -55,8 +55,8 @@ export default function RootLayout({
                 try {
                   const stored = localStorage.getItem('theme');
                   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  const theme = stored || (prefersDark ? 'dark' : 'light');
-                  if (theme === 'dark') {
+                  
+                  if (stored === 'dark' || ((!stored || stored === 'system') && prefersDark)) {
                     document.documentElement.classList.add('dark');
                   }
                 } catch (_) {}

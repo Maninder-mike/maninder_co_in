@@ -1,21 +1,21 @@
 @import "tailwindcss";
+@variant dark (&:where(.dark, .dark *));
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
   --radius-xl: 1.25rem;
+  --color-accent: #18181b; /* zinc-900 default */
+  --color-accent-foreground: #ffffff;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+
 
 .dark {
   --background: #0a0a0a;
   --foreground: #ededed;
+  --color-accent: #fafafa;
+  --color-accent-foreground: #18181b;
 }
 
 body {
@@ -49,4 +49,65 @@ body {
 
 .animate-slide-up {
   animation: slide-up 0.3s ease-out;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* Futuristic Utilities */
+@layer utilities {
+  .glass {
+    @apply backdrop-blur-lg shadow-xl border;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+  .dark .glass {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-600 to-zinc-900;
+  }
+  .dark .text-gradient {
+    @apply bg-gradient-to-r from-white via-zinc-400 to-zinc-200;
+  }
+
+  .glow-sm {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  }
+  .glow-md {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+  }
+}
+
+/* Background Grid Pattern */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(128, 128, 128, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(128, 128, 128, 0.05) 1px, transparent 1px);
+}
+
+.dark .bg-grid-pattern {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
 }
