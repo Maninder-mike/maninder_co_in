@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 export function SiteCustomizer() {
   const [theme, setTheme] = useState<"light" | "dark" | "system">("system");
-  const [accent, setAccent] = useState<string>("default");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -16,9 +15,6 @@ export function SiteCustomizer() {
       | "system"
       | null;
     if (storedTheme) setTheme(storedTheme);
-
-    const storedAccent = localStorage.getItem("accent");
-    if (storedAccent) setAccent(storedAccent);
   }, []);
 
   useEffect(() => {
@@ -44,36 +40,12 @@ export function SiteCustomizer() {
     }
   }, [theme]);
 
-  useEffect(() => {
-    const root = document.documentElement;
-    if (accent === "default") {
-      root.style.removeProperty("--color-accent");
-      root.style.removeProperty("--color-accent-foreground");
-    } else {
-      root.style.setProperty("--color-accent", accent);
-      root.style.setProperty("--color-accent-foreground", "#ffffff");
-    }
-  }, [accent]);
-
   const updateTheme = (val: "light" | "dark" | "system") => {
     setTheme(val);
     localStorage.setItem("theme", val);
   };
 
-  const updateAccent = (val: string) => {
-    setAccent(val);
-    localStorage.setItem("accent", val);
-  };
-
   if (!mounted) return null;
-
-  const colors = [
-    { name: "Default", value: "default", bg: "bg-zinc-900 dark:bg-zinc-100" },
-    { name: "Blue", value: "#3b82f6", bg: "bg-blue-500" },
-    { name: "Green", value: "#22c55e", bg: "bg-green-500" },
-    { name: "Orange", value: "#f97316", bg: "bg-orange-500" },
-    { name: "Violet", value: "#8b5cf6", bg: "bg-violet-500" },
-  ];
 
   return (
     <div className="flex flex-col gap-4 text-xs text-zinc-500 dark:text-zinc-400">
@@ -112,22 +84,6 @@ export function SiteCustomizer() {
               </svg>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className="flex items-center gap-2">
-        <span>Accent:</span>
-        <div className="flex gap-2">
-          {colors.map((c) => (
-            <button
-              key={c.name}
-              onClick={() => updateAccent(c.value)}
-              className={`h-5 w-5 rounded-full border border-zinc-200 shadow-sm transition hover:scale-110 dark:border-zinc-700 ${c.bg
-                } ${accent === c.value ? "ring-2 ring-zinc-400 dark:ring-zinc-500" : ""}`}
-              title={c.name}
-              aria-label={`Set accent color to ${c.name}`}
-            />
-          ))}
         </div>
       </div>
     </div>

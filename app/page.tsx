@@ -87,7 +87,7 @@ export default async function Home() {
           <div className="hidden gap-6 text-sm font-medium sm:flex">
             <a href="#work" className="hover:text-zinc-600 dark:hover:text-zinc-300">Work</a>
             <a href="#travel" className="hover:text-zinc-600 dark:hover:text-zinc-300">Travel</a>
-            <a href="#about" className="hover:text-zinc-600 dark:hover:text-zinc-300">About</a>
+            <a href="/about" className="hover:text-zinc-600 dark:hover:text-zinc-300">About</a>
           </div>
         </div>
       </nav>
@@ -109,22 +109,7 @@ export default async function Home() {
           </p>
 
           <div className="flex flex-wrap gap-4">
-            <a
-              href="#work"
-              className="inline-flex items-center justify-center rounded-full px-8 py-3 text-sm font-medium transition-transform hover:scale-105 hover:opacity-90"
-              style={{
-                backgroundColor: "var(--color-accent)",
-                color: "var(--color-accent-foreground)",
-              }}
-            >
-              View Work
-            </a>
-            <a
-              href="#about"
-              className="inline-flex items-center justify-center rounded-full border border-zinc-200 bg-white px-8 py-3 text-sm font-medium text-zinc-900 transition-transform hover:scale-105 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-white dark:hover:bg-zinc-800"
-            >
-              About Me
-            </a>
+
           </div>
         </div>
       </section>
@@ -225,6 +210,8 @@ export default async function Home() {
         </div>
       </section>
 
+
+
       {/* Running Section (Achievements) */}
       <section id="running" className="relative z-10 mx-auto max-w-6xl px-6 py-32">
         <div className="mb-16 flex items-end justify-between">
@@ -304,7 +291,7 @@ export default async function Home() {
                 <ul className="space-y-3 text-sm">
                   <li><a href="#work" className="hover:underline">Work</a></li>
                   <li><a href="#travel" className="hover:underline">Travel</a></li>
-                  <li><a href="#about" className="hover:underline">About</a></li>
+                  <li><a href="/about" className="hover:underline">About</a></li>
                   <li className="pt-4">
                     <SiteCustomizer />
                   </li>
