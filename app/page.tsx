@@ -1,3 +1,4 @@
+import Link from "next/link";
 import NewsletterForm, {
   type NewsletterState,
 } from "./_components/newsletter-form";
@@ -151,14 +152,23 @@ export default async function Home() {
 
                 <div className="flex items-center gap-4">
                   {project.link && (
-                    <a
-                      href={project.link.startsWith('http') ? project.link : `https://${project.link}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm font-medium underline underline-offset-4"
-                    >
-                      View Live
-                    </a>
+                    project.link.startsWith('/') ? (
+                      <Link
+                        href={project.link}
+                        className="text-sm font-medium underline underline-offset-4"
+                      >
+                        View Case Study
+                      </Link>
+                    ) : (
+                      <a
+                        href={project.link.startsWith('http') ? project.link : `https://${project.link}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm font-medium underline underline-offset-4"
+                      >
+                        View Live
+                      </a>
+                    )
                   )}
                   {project.github_url && (
                     <a

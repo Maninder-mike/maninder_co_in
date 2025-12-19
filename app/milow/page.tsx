@@ -46,7 +46,7 @@ export default function MilowPage() {
                     </h1>
 
                     <p className="max-w-2xl text-2xl font-light leading-relaxed text-zinc-600 dark:text-zinc-400">
-                        The modern companion for semi-truck drivers. Manage trips, track fuel, and streamline operations with a beautiful, native mobile experience.
+                        The modern companion for semi-truck drivers and trucking companies. Manage trips, track fuel, and streamline operations with a beautiful, native mobile experience.
                     </p>
 
                     <div className="flex flex-wrap gap-4 pt-4">
@@ -83,7 +83,7 @@ export default function MilowPage() {
                     <FeatureCard
                         icon={<BarChart3 className="h-6 w-6 text-blue-500" />}
                         title="Dashboard Analytics"
-                        description="Visualize weekly performance, track mileage, and monitor fuel consumption with interactive charts."
+                        description="Visualize performance, track mileage, and monitor fuel consumption for efficient operations."
                     />
                     <FeatureCard
                         icon={<MapIcon className="h-6 w-6 text-blue-500" />}
@@ -98,7 +98,7 @@ export default function MilowPage() {
                     <FeatureCard
                         icon={<FileText className="h-6 w-6 text-blue-500" />}
                         title="Smart Exports"
-                        description="Generate professional PDF reports of your logs and share them instantly via email or AirDrop."
+                        description="Generate professional PDF reports for compliance, payroll, and logs, and share them instantly."
                     />
                     <FeatureCard
                         icon={<Settings className="h-6 w-6 text-blue-500" />}
@@ -136,6 +136,7 @@ export default function MilowPage() {
                     <p className="text-sm text-zinc-500">© {new Date().getFullYear()} Maninder. Open Source.</p>
                     <div className="flex gap-6 text-sm font-medium">
                         <Link href="/milow/privacypolicy" className="hover:text-blue-600 dark:hover:text-blue-400">Privacy Policy</Link>
+                        <Link href="/milow/termsandconditions" className="hover:text-blue-600 dark:hover:text-blue-400">Terms & Conditions</Link>
                         <a href="https://github.com/Maninder-mike/milow" className="hover:text-blue-600 dark:hover:text-blue-400">Repository</a>
                         <a href="https://github.com/Maninder-mike/milow/issues" className="hover:text-blue-600 dark:hover:text-blue-400">Report Issue</a>
                     </div>

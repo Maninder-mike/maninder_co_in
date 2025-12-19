@@ -57,13 +57,14 @@ export default function AboutPage() {
                     <div className="sticky top-32 space-y-8">
                         <div className="relative aspect-square rotate-3 overflow-hidden rounded-3xl border border-zinc-200 bg-zinc-100 shadow-2xl transition-transform hover:rotate-0 dark:border-zinc-800 dark:bg-zinc-900">
                             <div className="absolute inset-0 bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-800 dark:to-zinc-900" />
-                            <div className="absolute inset-0 flex items-center justify-center text-center p-6">
-                                <span className="text-sm font-medium text-zinc-400">
-                                    [Add your profile photo here]
-                                    <br />
-                                    /public/me.jpg
-                                </span>
-                            </div>
+                            <video
+                                src="/me.mp4"
+                                autoPlay
+                                muted
+                                loop
+                                playsInline
+                                className="absolute inset-0 h-full w-full object-cover"
+                            />
                         </div>
 
                         <div className="rounded-2xl border border-zinc-200 bg-zinc-50 p-6 dark:border-zinc-800 dark:bg-zinc-900/50">
