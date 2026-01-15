@@ -4,7 +4,7 @@ import { createClient } from "@/lib/supabase/ssr";
 import { redirect } from "next/navigation";
 
 
-export async function updatePassword(prevState: any, formData: FormData) {
+export async function updatePassword(prevState: unknown, formData: FormData) {
     const password = formData.get("password") as string;
     const passwordConfirm = formData.get("confirmPassword") as string;
 
