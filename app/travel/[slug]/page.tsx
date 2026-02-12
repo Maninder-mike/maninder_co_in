@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getTravelLogBySlug } from "@/lib/supabase/queries";
+import { travelLogs } from "@/lib/data/travel-logs";
 import { notFound } from "next/navigation";
 
 export default async function TravelPage({
@@ -8,7 +8,7 @@ export default async function TravelPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const log = await getTravelLogBySlug(slug);
+  const log = travelLogs.find(l => l.slug === slug);
 
   if (!log) {
     notFound();

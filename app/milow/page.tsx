@@ -1,7 +1,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, Github, Shield, Truck, BarChart3, Map as MapIcon, FileText, Settings, Sparkles, Vibrate, Zap, Monitor, Smartphone, Users, Receipt, Route, MessageSquare, Bell, Building2, Calculator, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, Github, Shield, Truck, Vibrate, Zap, Monitor, Smartphone, Bell, CheckCircle2, Timer, FileX, EyeOff, BarChart3, TrendingUp } from "lucide-react";
 import { HeroImage } from "./_components/hero-image";
 import { BrandStrip } from "./_components/brand-strip";
 import { BentoCard } from "./_components/bento-card";
@@ -48,15 +48,16 @@ export default function MilowPage() {
                             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75"></span>
                             <span className="relative inline-flex h-2 w-2 rounded-full bg-blue-500"></span>
                         </span>
-                        Open Source Flutter Platform
+                        Enterprise Logistics Platform
                     </div>
 
                     <h1 className="text-6xl font-bold tracking-tighter sm:text-7xl xl:text-8xl">
-                        Milow<span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">.</span>
+                        Logistics OS <br />
+                        <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">for the 1%.</span>
                     </h1>
 
                     <p className="max-w-2xl text-xl font-light leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-2xl">
-                        The complete trucking operating system. <span className="font-medium text-zinc-900 dark:text-zinc-100">Driver App</span> for the road, <span className="font-medium text-zinc-900 dark:text-zinc-100">Terminal</span> for the office. Built for scale.
+                        Operational control for the modern fleet. <span className="font-medium text-zinc-900 dark:text-zinc-100">Driver Experience</span> that retains elite talent, <span className="font-medium text-zinc-900 dark:text-zinc-100">Enterprise Tools</span> that drive exponential profit.
                     </p>
 
                     <div className="flex flex-wrap gap-4 pt-4">
@@ -98,6 +99,49 @@ export default function MilowPage() {
             {/* Social Proof */}
             <BrandStrip />
 
+            {/* Section: The Operational Friction (Pain Points) */}
+            <section className="relative z-10 bg-zinc-900 py-32 text-white overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 to-transparent blur-3xl opacity-50" />
+                <div className="mx-auto max-w-7xl px-6 relative z-10">
+                    <div className="text-center mb-20">
+                        <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl">Industry Friction Costs Millions</h2>
+                        <p className="mt-4 text-xl text-zinc-400 max-w-2xl mx-auto">
+                            Legacy systems are built for compliance, not performance. Milow is built for the actual reality of the road.
+                        </p>
+                    </div>
+
+                    <div className="grid gap-12 md:grid-cols-3">
+                        <div className="space-y-4 p-8 rounded-3xl bg-zinc-800/50 border border-zinc-700/50 backdrop-blur-md">
+                            <div className="h-12 w-12 rounded-2xl bg-red-500/20 flex items-center justify-center">
+                                <FileX className="h-6 w-6 text-red-400" />
+                            </div>
+                            <h3 className="text-2xl font-bold italic">"I lost the BOL."</h3>
+                            <p className="text-zinc-400">
+                                Paperwork errors cause <span className="text-white font-medium">15% of payment delays</span>. Our driver-first scanner eliminates the friction before it hits the office.
+                            </p>
+                        </div>
+                        <div className="space-y-4 p-8 rounded-3xl bg-zinc-800/50 border border-zinc-700/50 backdrop-blur-md">
+                            <div className="h-12 w-12 rounded-2xl bg-amber-500/20 flex items-center justify-center">
+                                <Timer className="h-6 w-6 text-amber-400" />
+                            </div>
+                            <h3 className="text-2xl font-bold italic">"When do I get paid?"</h3>
+                            <p className="text-zinc-400">
+                                Manual settlements are slow. Milow automates the paperwork-to-payment pipeline, <span className="text-white font-medium">reducing days-to-pay by 60%</span>.
+                            </p>
+                        </div>
+                        <div className="space-y-4 p-8 rounded-3xl bg-zinc-800/50 border border-zinc-700/50 backdrop-blur-md">
+                            <div className="h-12 w-12 rounded-2xl bg-blue-500/20 flex items-center justify-center">
+                                <EyeOff className="h-6 w-6 text-blue-400" />
+                            </div>
+                            <h3 className="text-2xl font-bold italic">"Where's my driver?"</h3>
+                            <p className="text-zinc-400">
+                                Constant calls distract drivers. Our real-time command center provides <span className="text-white font-medium">100% visibility</span> without a single phone call.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* Driver App Spotlight */}
             <section className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-6 py-32 lg:grid-cols-2">
                 <div className="space-y-8">
@@ -105,9 +149,9 @@ export default function MilowPage() {
                         <Smartphone className="h-8 w-8 text-white" />
                     </div>
                     <div>
-                        <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl">Driver App</h2>
+                        <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl">Driver Excellence</h2>
                         <p className="mt-4 text-xl text-zinc-600 dark:text-zinc-400">
-                            The ultimate companion for the modern trucker. Detailed maps, trip logging, and instant dispatch communication.
+                            Give your drivers the tools they actually want to use. Reducing friction on the road means higher retention and safer miles.
                         </p>
                     </div>
 
@@ -200,9 +244,9 @@ export default function MilowPage() {
                     <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-violet-600 shadow-xl shadow-violet-500/20">
                         <Monitor className="h-8 w-8 text-white" />
                     </div>
-                    <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl">Terminal App</h2>
+                    <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl">Enterprise Command</h2>
                     <p className="mt-4 text-xl text-zinc-600 dark:text-zinc-400">
-                        A powerful command center for dispatchers. Manage fleets, loads, and invoices with desktop-grade productivity.
+                        Total oversight for dispatchers and fleet managers. Optimize your network with high-density data and automated workflows.
                     </p>
 
                     <div className="my-8 grid grid-cols-2 gap-4">
@@ -223,35 +267,57 @@ export default function MilowPage() {
                 </div>
             </section>
 
-            {/* Why Milow? (Bento Grid) */}
+            {/* Multi-Platform Ecosystem */}
+            <section className="relative z-10 border-t border-zinc-200 py-32 dark:border-zinc-800">
+                <div className="mx-auto max-w-7xl px-6">
+                    <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl text-center mb-16">One Platform, Every Device</h2>
+                    <div className="grid gap-8 md:grid-cols-3">
+                        {[
+                            { platform: "Android", icon: Smartphone, title: "Mobile Fleet", desc: "Native experience for drivers on the road. Play Store ready." },
+                            { platform: "macOS", icon: Github, title: "Terminal CLI", desc: "Automate your data with our Homebrew-powered command line tool." },
+                            { platform: "Windows", icon: Monitor, title: "Command Center", desc: "Full-resolution dispatch management via Microsoft Store." },
+                        ].map((item, i) => (
+                            <div key={i} className="glass p-8 rounded-3xl space-y-4">
+                                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-zinc-900 dark:bg-white dark:text-zinc-900">
+                                    <item.icon className="h-6 w-6" />
+                                </div>
+                                <h3 className="text-2xl font-bold">{item.platform} {item.title}</h3>
+                                <p className="text-zinc-600 dark:text-zinc-400">{item.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Impact Metrics (Revised Bento) */}
             <section className="relative z-10 mx-auto max-w-7xl px-6 py-32">
-                <h2 className="mb-12 text-center text-4xl font-bold tracking-tighter sm:text-5xl">Engineered for Scale</h2>
+                <div className="text-center mb-16">
+                    <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl">Engineered for Extreme Reliability</h2>
+                    <p className="mt-4 text-xl text-zinc-600 dark:text-zinc-400">No jargon. Just results that scale with your fleet.</p>
+                </div>
 
                 <div className="grid gap-4 md:grid-cols-3 md:grid-rows-2 lg:gap-6">
-                    {/* Main Feature: Performance */}
                     <BentoCard
-                        title="60fps Performance"
-                        description="Powered by the Impeller Engine. Memory-cached images, repaint isolation, and optimized rebuilds ensure buttery smooth scrolling even with thousands of loads."
-                        icon={<Zap className="h-6 w-6 text-amber-500" />}
+                        title="Zero-Interruption Operations"
+                        description="System-wide stability that handles thousands of concurrent loads without a single frame drop. Built on enterprise-grade architecture that keeps your business moving."
+                        icon={<TrendingUp className="h-6 w-6 text-blue-500" />}
                         className="md:col-span-2 md:row-span-2"
                         graphic={
-                            <div className="absolute inset-x-0 bottom-0 h-1/2 translate-y-12 bg-gradient-to-t from-amber-500/10 to-transparent blur-3xl" />
+                            <div className="absolute inset-x-0 bottom-0 h-1/2 translate-y-12 bg-gradient-to-t from-blue-500/10 to-transparent blur-3xl" />
                         }
                     />
 
-                    {/* Haptics */}
                     <BentoCard
-                        title="Haptic Feedback"
-                        description="14 tactile patterns. Feel the road in your app."
-                        icon={<Vibrate className="h-6 w-6 text-indigo-500" />}
+                        title="Driver-First Design"
+                        description="Intuitive 1-click workflows designed and tested for simplicity in the cab. Reduce stress, increase speed."
+                        icon={<Truck className="h-6 w-6 text-emerald-500" />}
                         className="md:col-span-1 md:row-span-1"
                     />
 
-                    {/* Realtime */}
                     <BentoCard
-                        title="Real-time Sync"
-                        description="Sub-millisecond latency with Supabase Realtime."
-                        icon={<Bell className="h-6 w-6 text-green-500" />}
+                        title="Mission-Critical Sync"
+                        description="Data is synchronized to your home office in real-time. Never lose another shipment status or inspection report."
+                        icon={<Zap className="h-6 w-6 text-amber-500" />}
                         className="md:col-span-1 md:row-span-1"
                     />
                 </div>

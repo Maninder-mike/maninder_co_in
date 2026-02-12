@@ -42,7 +42,7 @@ export default function PrivacyPolicyPage() {
                     <ul>
                         <li><strong>Personal Data:</strong> Personally identifiable information, such as your name, email address, and phone number, that you voluntarily give to us when you register with the Application.</li>
                         <li><strong>Derivative Data:</strong> Information our servers automatically collect when you access the Application, such as your IP address, your browser type, your operating system, your access times, and the pages you have viewed directly before and after accessing the Application.</li>
-                        <li><strong>Mobile Device Access:</strong> We may request access or permission to certain features from your mobile device, including your mobile device's camera (for scanning), storage (for saving documents), and biological identifiers (for FaceID/TouchID security).</li>
+                        <li><strong>Mobile Device Access:</strong> We may request access or permission to certain features from your mobile device, including your mobile device&apos;s camera (for scanning), storage (for saving documents), and biological identifiers (for FaceID/TouchID security).</li>
                     </ul>
 
                     <h3>2. Use of Your Information</h3>

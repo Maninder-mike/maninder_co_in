@@ -1,4 +1,4 @@
-import { ScanLine, FileText, Smartphone, Image as ImageIcon, CheckCircle2, Wand2 } from "lucide-react";
+import { ScanLine, CheckCircle2, Wand2 } from "lucide-react";
 
 export function HeroImage() {
     return (

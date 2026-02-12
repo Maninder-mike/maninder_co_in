@@ -55,7 +55,7 @@ export default function TermsPage() {
 
                     <h3>5. Subscriptions and Payments</h3>
                     <p>
-                        Some parts of the Service are billed on a subscription basis ("Subscription(s)"). You will be billed in advance on a recurring and periodic basis (such as daily, weekly, monthly or annually), depending on the type of Subscription plan you select when purchasing the Subscription.
+                        Some parts of the Service are billed on a subscription basis (&quot;Subscription(s)&quot;). You will be billed in advance on a recurring and periodic basis (such as daily, weekly, monthly or annually), depending on the type of Subscription plan you select when purchasing the Subscription.
                     </p>
 
                     <h3>6. Limitation of Liability</h3>

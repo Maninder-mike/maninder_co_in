@@ -13,9 +13,7 @@ interface BentoCardProps {
 
 export function BentoCard({ title, description, icon, className = "", graphic, fade = [] }: BentoCardProps) {
     return (
-        <div className={`group relative overflow-hidden rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-500/10 dark:border-zinc-800 dark:bg-zinc-950 ${className}`}>
-            {/* Background Glow */}
-            <div className="absolute -inset-px opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:bg-gradient-to-br dark:from-blue-500/5 dark:via-transparent dark:to-violet-500/5" />
+        <div className={`group relative overflow-hidden rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm transition-all hover:shadow-xl dark:border-zinc-800 dark:bg-zinc-950 ${className}`}>
 
             {/* Content Content - Positioned based on if there is a graphic */}
             <div className="relative z-10 flex h-full flex-col justify-between">
@@ -24,7 +22,7 @@ export function BentoCard({ title, description, icon, className = "", graphic, f
                         {icon}
                     </div>
                     <h3 className="mb-2 text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">{title}</h3>
-                    <p className="max-w-[80%] text-zinc-500 dark:text-zinc-400">{description}</p>
+                    <p className="max-w-[90%] text-zinc-500 dark:text-zinc-400">{description}</p>
                 </div>
 
                 {/* Optional Graphic Slot */}
