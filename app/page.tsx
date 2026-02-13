@@ -60,14 +60,14 @@ export default async function Home() {
       <section className="relative z-10 mx-auto flex min-h-[85vh] max-w-6xl flex-col justify-center px-6 pt-20">
         <div className="max-w-4xl space-y-8">
           <h1 className="text-5xl font-bold tracking-tighter sm:text-7xl lg:text-9xl leading-[0.9]">
-            Building digital <br />
+            Engineering <br />
             <span className="text-gradient">
-              experiences.
+              The Journey.
             </span>
           </h1>
 
-          <p className="max-w-2xl text-lg sm:text-2xl leading-relaxed text-zinc-600 dark:text-zinc-400 font-medium">
-            I&apos;m Maninder, a mobile developer and traveler. I craft fast, native applications and explore the world one run at a time.
+          <p className="max-w-3xl text-lg sm:text-2xl leading-relaxed text-zinc-600 dark:text-zinc-400 font-medium">
+            Mobile Engineer & World Traveler. I build seamless digital products by day and explore global trails by foot, merging technical rigor with a passion for exploration.
           </p>
         </div>
       </section>
