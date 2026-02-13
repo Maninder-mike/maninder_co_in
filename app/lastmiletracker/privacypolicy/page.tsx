@@ -86,7 +86,7 @@ export default function PrivacyPolicy() {
                     </article>
 
                     <footer className="pt-12 border-t border-zinc-200 dark:border-zinc-800 text-sm text-zinc-500">
-                        If you have questions about this policy, please contact <a href="mailto:support@maninder.co.in" className="text-emerald-600 hover:underline">support@maninder.co.in</a>.
+                        If you have questions about this policy, please contact <a href="mailto:info@maninder.co.in" className="text-emerald-600 hover:underline">info@maninder.co.in</a>.
                     </footer>
                 </div>
             </main>

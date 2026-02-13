@@ -5,7 +5,7 @@ import { ArrowLeft, Github, Shield, Truck, Vibrate, Zap, Monitor, Smartphone, Be
 import { HeroImage } from "./_components/hero-image";
 import { BrandStrip } from "./_components/brand-strip";
 import { BentoCard } from "./_components/bento-card";
-import { MsStoreBadge } from "./_components/ms-store-badge";
+import { StoreButton } from "./_components/store-button";
 
 export const metadata = {
     title: "Milow | Semi Trucking Platform",
@@ -170,20 +170,10 @@ export default function MilowPage() {
                         ))}
                     </div>
 
-                    <a
+                    <StoreButton
+                        store="google"
                         href="https://play.google.com/apps/testing/maninder.co.in.milow"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block transition-transform hover:scale-105 active:scale-95"
-                    >
-                        <Image
-                            alt="Get it on Google Play"
-                            src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
-                            width={203}
-                            height={60}
-                            style={{ width: "auto", height: "60px" }}
-                        />
-                    </a>
+                    />
                 </div>
 
                 {/* Mobile Mockup Placeholder */}
@@ -263,7 +253,10 @@ export default function MilowPage() {
                         ))}
                     </div>
 
-                    <MsStoreBadge />
+                    <StoreButton
+                        store="microsoft"
+                        href="ms-windows-store://pdp/?productid=9P641Q1X1BMG"
+                    />
                 </div>
             </section>
 

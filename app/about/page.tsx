@@ -73,7 +73,7 @@ export default function AboutPage() {
                                 <li><a href="https://x.com/maninder_mike" className="flex items-center hover:text-zinc-900 dark:hover:text-zinc-100">Twitter / X ↗</a></li>
                                 <li><a href="https://github.com/maninder-mike" className="flex items-center hover:text-zinc-900 dark:hover:text-zinc-100">GitHub ↗</a></li>
                                 <li><a href="https://linkedin.com/in/maninder-mike" className="flex items-center hover:text-zinc-900 dark:hover:text-zinc-100">LinkedIn ↗</a></li>
-                                <li><a href="mailto:hello@maninder.co.in" className="flex items-center hover:text-zinc-900 dark:hover:text-zinc-100">Email ↗</a></li>
+                                <li><a href="mailto:info@maninder.co.in" className="flex items-center hover:text-zinc-900 dark:hover:text-zinc-100">Email ↗</a></li>
                             </ul>
                         </div>
                     </div>

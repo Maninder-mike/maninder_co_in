@@ -8,6 +8,7 @@ import { ProjectCard } from "./_components/project-card";
 import { MobileNav } from "./_components/mobile-nav";
 import { projects } from "@/lib/data/projects";
 import { travelLogs } from "@/lib/data/travel-logs";
+import { TravelVectorCover } from "./travel/_components/travel-vector-cover";
 
 const NewsletterForm = dynamic(() => import("./_components/newsletter-form"));
 const SiteCustomizer = dynamic(() =>
@@ -112,26 +113,14 @@ export default async function Home() {
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {publishedLogs.map((place) => {
-            const isGradient = place.cover_image?.startsWith("bg-gradient");
             return (
               <a
                 key={place.slug}
                 href={`/travel/${place.slug}`}
                 className="group relative aspect-[4/5] overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-900"
               >
-                {place.cover_image && (
-                  isGradient ? (
-                    <div className={`absolute inset-0 ${place.cover_image} opacity-80 transition-all duration-500 group-hover:scale-110 group-hover:opacity-100`} />
-                  ) : (
-                    <Image
-                      src={place.cover_image}
-                      alt={place.title}
-                      fill
-                      className="object-cover opacity-80 transition-all duration-500 group-hover:scale-110 group-hover:opacity-100"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    />
-                  )
-                )}
+                <TravelVectorCover slug={place.slug} className="transition-transform duration-500 group-hover:scale-105" />
+
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-6 flex flex-col justify-end">
                   <h3 className="text-xl font-bold text-white">{place.title}</h3>
                   <span className="mt-2 inline-block translate-y-4 text-xs font-medium text-white/80 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">

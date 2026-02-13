@@ -65,7 +65,7 @@ export default function DeleteAccountPage() {
                             </div>
                             <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
                                 <h3 className="font-bold mb-2">Option 2: Email</h3>
-                                <p className="text-sm text-zinc-500 mb-4">Send an email to <a href="mailto:delete@maninder.co.in" className="text-emerald-600 font-bold">delete@maninder.co.in</a> from your registered email address.</p>
+                                <p className="text-sm text-zinc-500 mb-4">Send an email to <a href="mailto:info@maninder.co.in" className="text-emerald-600 font-bold">info@maninder.co.in</a> from your registered email address.</p>
                             </div>
                         </div>
                     </section>

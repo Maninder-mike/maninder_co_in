@@ -33,8 +33,8 @@ export default function SupportPage() {
                         icon={<Mail className="h-6 w-6" />}
                         title="Email Support"
                         description="General inquiries and technical support."
-                        link="mailto:support@maninder.co.in"
-                        linkText="support@maninder.co.in"
+                        link="mailto:info@maninder.co.in"
+                        linkText="info@maninder.co.in"
                     />
                     <SupportCard
                         icon={<MessageSquare className="h-6 w-6" />}
@@ -57,7 +57,7 @@ export default function SupportPage() {
                     <p className="max-w-xl opacity-90">
                         Need custom hardware integration or on-premise cloud deployment? We offer dedicated support and custom firmware development for enterprise fleets.
                     </p>
-                    <a href="mailto:maninder@maninder.co.in" className="bg-white text-emerald-600 px-8 py-3 rounded-full font-bold hover:bg-zinc-100 transition-colors">
+                    <a href="mailto:info@maninder.co.in" className="bg-white text-emerald-600 px-8 py-3 rounded-full font-bold hover:bg-zinc-100 transition-colors">
                         Contact Sales
                     </a>
                 </div>
