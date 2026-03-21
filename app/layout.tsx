@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import { ToastProvider } from "./_components/toast-provider";
+import { headers } from "next/headers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,6 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://maninder.co.in"),
   title: "Maninder | Mobile Dev, Traveler & Runner",
   description:
     "Portfolio of Maninder – iOS & Android developer, world traveler, runner. Projects, journeys and upcoming experiments.",
@@ -38,11 +40,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const nonce = (await headers()).get("x-nonce") ?? "";
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -53,6 +56,7 @@ export default function RootLayout({
         />
         {/* Prevent initial flash & set theme early */}
         <script
+          nonce={nonce}
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
@@ -72,6 +76,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <a 
+          href="#main-content" 
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-zinc-900 focus:shadow-2xl focus:outline-none dark:focus:bg-zinc-900 dark:focus:text-white"
+        >
+          Skip to content
+        </a>
         <ToastProvider>{children}</ToastProvider>
         <Analytics />
         <SpeedInsights />

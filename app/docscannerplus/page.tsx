@@ -1,9 +1,12 @@
 
 import Link from "next/link";
+import { JsonLd } from "../_components/json-ld";
 import { ArrowLeft, Github, Scan, Smartphone, Wand2, Zap, Share2, Layers, Cloud, FileText, CheckCircle2, Shield } from "lucide-react";
 import { HeroImage } from "./_components/hero-image";
 import { BrandStrip } from "./_components/brand-strip";
 import { BentoCard } from "./_components/bento-card";
+import { SiteNav } from "../_components/site-nav";
+import { SiteFooter } from "../_components/site-footer";
 
 export const metadata = {
     title: "DocScanner Plus | AI Document Scanner",
@@ -13,29 +16,25 @@ export const metadata = {
 export default function DocScannerPlusPage() {
     return (
         <div className="min-h-dvh bg-zinc-50 text-zinc-900 selection:bg-indigo-900 selection:text-white dark:bg-zinc-950 dark:text-zinc-100 dark:selection:bg-indigo-100 dark:selection:text-indigo-900">
+            <JsonLd
+                data={{
+                    "@context": "https://schema.org",
+                    "@type": "SoftwareApplication",
+                    name: "DocScanner Plus",
+                    operatingSystem: "Android, iOS",
+                    applicationCategory: "ProductivityApplication",
+                    offers: {
+                        "@type": "Offer",
+                        price: "0",
+                        priceCurrency: "USD",
+                    },
+                }}
+            />
             {/* Background Grid */}
             <div className="fixed inset-0 z-0 pointer-events-none bg-grid-pattern opacity-50"></div>
 
             {/* Navigation */}
-            <nav className="fixed top-0 left-0 right-0 z-50 border-b border-zinc-200 bg-white/80 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/80">
-                <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-                    <Link href="/" className="flex items-center gap-2 text-sm font-medium hover:text-zinc-600 dark:hover:text-zinc-300">
-                        <ArrowLeft className="h-4 w-4" />
-                        Back to Home
-                    </Link>
-                    <div className="flex gap-4">
-                        <a
-                            href="https://github.com/Maninder-mike"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-100 px-4 py-2 text-sm font-medium transition-colors hover:bg-zinc-200 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:bg-zinc-800"
-                        >
-                            <Github className="h-4 w-4" />
-                            <span>GitHub</span>
-                        </a>
-                    </div>
-                </div>
-            </nav>
+            <SiteNav variant="product" githubUrl="https://github.com/Maninder-mike" />
 
             {/* Hero Section */}
             <section className="relative z-10 mx-auto grid max-w-7xl gap-12 px-6 pt-32 lg:grid-cols-2 lg:items-center">
@@ -159,16 +158,15 @@ export default function DocScannerPlusPage() {
             </section>
 
             {/* Footer */}
-            <footer className="relative z-10 border-t border-zinc-200 bg-white py-12 dark:border-zinc-800 dark:bg-zinc-950">
-                <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-6 sm:flex-row">
-                    <p className="text-sm text-zinc-500">© {new Date().getFullYear()} DocScanner Plus. All rights reserved.</p>
-                    <div className="flex gap-6 text-sm font-medium">
-                        <Link href="/docscannerplus/privacypolicy" className="hover:text-indigo-600 dark:hover:text-indigo-400">Privacy Policy</Link>
-                        <Link href="/docscannerplus/terms" className="hover:text-indigo-600 dark:hover:text-indigo-400">Terms of Service</Link>
-                        <Link href="/docscannerplus/support" className="hover:text-indigo-600 dark:hover:text-indigo-400">Support</Link>
-                    </div>
-                </div>
-            </footer>
+            <SiteFooter
+                variant="product"
+                productName="DocScanner Plus"
+                links={[
+                    { label: "Privacy Policy", href: "/docscannerplus/privacypolicy" },
+                    { label: "Terms of Service", href: "/docscannerplus/terms" },
+                    { label: "Support", href: "/docscannerplus/support" },
+                ]}
+            />
         </div>
     );
 }

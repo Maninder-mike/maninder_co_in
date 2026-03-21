@@ -161,17 +161,14 @@ function AutoLocationForm({
           name="email"
           required
           placeholder="you@example.com"
-          className="w-1/2 rounded-full border border-zinc-300 bg-white px-4 py-2 text-xs text-zinc-900 outline-none transition focus:border-zinc-500 focus:ring-2 focus:ring-zinc-200 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:focus:border-zinc-500"
+          className="w-full sm:w-1/2 rounded-full border border-zinc-300 bg-white px-4 py-2 text-xs text-zinc-900 outline-none transition focus:border-zinc-500 focus:ring-2 focus:ring-zinc-200 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:focus:border-zinc-500"
         />
         {/* Hidden auto location field */}
         <input type="hidden" name="location" value={loc} />
         <Submit />
       </div>
-      <p className="text-[11px] text-zinc-500 dark:text-zinc-400">
-        {locStatus === "getting" && "Detecting approximate location..."}
-        {locStatus === "ok" && "Location captured (coarse)."}
-        {locStatus === "err" && "Using timezone as location fallback."}
-        {locStatus === "idle" && "Preparing location..."}
+      <p className="text-[11px] text-zinc-400">
+        No spam, ever. Unsubscribe anytime.
       </p>
     </form>
   );

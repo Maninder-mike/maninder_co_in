@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import * as Icons from "lucide-react";
+import { Menu, X, Twitter, Github, Linkedin } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function MobileNav() {
@@ -22,6 +22,7 @@ export function MobileNav() {
         { href: "#work", label: "Work" },
         { href: "#travel", label: "Travel" },
         { href: "/about", label: "About" },
+        { href: "/blog", label: "Blog" },
     ];
 
     return (
@@ -31,7 +32,7 @@ export function MobileNav() {
                 className="p-2 text-zinc-900 dark:text-zinc-100"
                 aria-label="Open menu"
             >
-                <Icons.Menu size={24} />
+                <Menu size={24} />
             </button>
 
             <AnimatePresence>
@@ -50,9 +51,8 @@ export function MobileNav() {
                             exit={{ x: "100%", opacity: 1 }}
                             transition={{ type: "spring", damping: 25, stiffness: 200 }}
                             className="fixed inset-y-0 right-0 z-[110] w-[80%] max-w-sm border-l border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950 shadow-2xl overflow-hidden"
-                            style={{ backgroundColor: 'rgb(255, 255, 255)', opacity: 1 }}
                         >
-                            <div className="flex flex-col h-full bg-white dark:bg-zinc-950 p-8" style={{ backgroundColor: 'inherit' }}>
+                            <div className="flex flex-col h-full bg-white dark:bg-zinc-950 p-8">
                                 <div className="flex items-center justify-between mb-12">
                                     <span className="text-lg font-bold tracking-tighter">Menu</span>
                                     <button
@@ -60,7 +60,7 @@ export function MobileNav() {
                                         className="p-2 text-zinc-900 dark:text-zinc-100 transition-transform active:scale-95"
                                         aria-label="Close menu"
                                     >
-                                        <Icons.X size={24} />
+                                        <X size={24} />
                                     </button>
                                 </div>
 
@@ -83,9 +83,9 @@ export function MobileNav() {
                                     <div className="space-y-4">
                                         <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-500">Socials</h4>
                                         <div className="flex gap-6">
-                                            <a href="https://x.com/maninder_mike" className="text-zinc-600 dark:text-zinc-400 hover:text-blue-600 transition-colors"><Icons.Twitter size={20} /></a>
-                                            <a href="https://github.com/maninder-mike" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 transition-colors"><Icons.Github size={20} /></a>
-                                            <a href="https://linkedin.com/in/maninder-mike" className="text-zinc-600 dark:text-zinc-400 hover:text-blue-700 transition-colors"><Icons.Linkedin size={20} /></a>
+                                            <a href="https://x.com/maninder_mike" className="text-zinc-600 dark:text-zinc-400 hover:text-blue-600 transition-colors"><Twitter size={20} /></a>
+                                            <a href="https://github.com/maninder-mike" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 transition-colors"><Github size={20} /></a>
+                                            <a href="https://linkedin.com/in/maninder-mike" className="text-zinc-600 dark:text-zinc-400 hover:text-blue-700 transition-colors"><Linkedin size={20} /></a>
                                         </div>
                                     </div>
                                     <p className="text-xs text-zinc-500">© {new Date().getFullYear()} Maninder</p>

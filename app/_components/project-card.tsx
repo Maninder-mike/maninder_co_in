@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import * as Icons from "lucide-react";
+import { Box, Sparkles, Truck, Globe, Scan, ExternalLink, Clapperboard } from "lucide-react";
 import { Project } from "@/lib/types";
 
 interface ProjectCardProps {
@@ -11,7 +11,13 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project, className = "", isFeatured = false }: ProjectCardProps) {
-    const IconComponent = project.icon ? (Icons as any)[project.icon] : Icons.Box;
+    const iconMap: Record<string, React.ElementType> = {
+        Truck,
+        Globe,
+        Scan,
+        Clapperboard,
+    };
+    const IconComponent = project.icon ? (iconMap[project.icon] || Box) : Box;
 
     const getGradientClass = (category?: string) => {
         const cat = category?.toLowerCase() || "";
@@ -19,6 +25,7 @@ export function ProjectCard({ project, className = "", isFeatured = false }: Pro
         if (cat.includes("fitness")) return "gradient-fitness";
         if (cat.includes("productivity")) return "gradient-productivity";
         if (cat.includes("supply")) return "gradient-supply";
+        if (cat.includes("entertainment")) return "gradient-fitness"; // Using fitness gradient (indigo/violet) for entertainment
         return "gradient-productivity";
     };
 
@@ -53,7 +60,7 @@ export function ProjectCard({ project, className = "", isFeatured = false }: Pro
                     {project.outcome && (
                         <div className="flex items-center gap-2">
                             <div className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
-                                <Icons.Sparkles size={12} />
+                                <Sparkles size={12} />
                             </div>
                             <span className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">
                                 {project.outcome}
@@ -72,7 +79,7 @@ export function ProjectCard({ project, className = "", isFeatured = false }: Pro
                                 className="group/link flex items-center gap-2 text-xs font-bold text-blue-600 dark:text-blue-400 transition-all font-mono uppercase tracking-wider"
                             >
                                 <span>View Project</span>
-                                <Icons.ExternalLink size={12} className="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                                <ExternalLink size={12} className="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                             </Link>
                         )}
                     </div>

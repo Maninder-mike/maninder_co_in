@@ -1,0 +1,23 @@
+---
+title: "Building this site with Next.js and MDX"
+date: "2026-03-12"
+summary: "A quick look at how the blog section was built using next-mdx-remote and gray-matter."
+---
+
+# Welcome to my digital garden
+
+I wanted a place to share my thoughts, technically and personally. Building this blog wasn't just about throwing up a WordPress instance—it was an opportunity to integrate modern tools into the workflow.
+
+This blog runs directly inside a **Next.js 16 App Router**. I write posts in standard Markdown (`.mdx`), drop them into a local `content/blog` folder, and the app takes care of the rest.
+
+## Why MDX?
+
+Markdown on its own is great for text, but MDX brings the power of **React Components** directly into markdown files. This means I can embed interactive elements right alongside my thoughts.
+
+```tsx
+export default function Example() {
+  return <div>Embedded directly from MDX!</div>
+}
+```
+
+Stay tuned for more updates on mobile engineering, running, and travels!

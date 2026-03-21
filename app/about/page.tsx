@@ -1,26 +1,22 @@
-import Link from "next/link";
+import { Metadata } from "next";
+import { SiteNav } from "../_components/site-nav";
+import { SiteFooter } from "../_components/site-footer";
+
+export const metadata: Metadata = {
+  title: "About | Maninder",
+  description: "Learn more about Maninder, a software engineer, traveler, and runner.",
+};
 
 export default function AboutPage() {
     return (
         <div className="min-h-dvh bg-zinc-50 text-zinc-900 selection:bg-zinc-900 selection:text-white dark:bg-zinc-950 dark:text-zinc-100 dark:selection:bg-zinc-100 dark:selection:text-zinc-900">
             {/* Navigation */}
-            <nav className="fixed top-0 left-0 right-0 z-50 border-b border-zinc-200 bg-white/80 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/80">
-                <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-                    <Link href="/" className="text-xl font-bold tracking-tighter">
-                        Maninder
-                    </Link>
-                    <div className="hidden gap-6 text-sm font-medium sm:flex">
-                        <Link href="/#work" className="hover:text-zinc-600 dark:hover:text-zinc-300">Work</Link>
-                        <Link href="/#travel" className="hover:text-zinc-600 dark:hover:text-zinc-300">Travel</Link>
-                        <Link href="/about" className="text-zinc-900 dark:text-zinc-100">About</Link>
-                    </div>
-                </div>
-            </nav>
+            <SiteNav variant="default" />
 
-            <main className="mx-auto max-w-4xl px-6 py-32">
+            <main id="main-content" className="mx-auto max-w-4xl px-6 py-32">
                 <div className="grid gap-16 lg:grid-cols-2 lg:items-start">
                     <div className="space-y-8">
-                        <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl">
+                        <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl lg:text-5xl">
                             More than just code.
                         </h1>
                         <div className="space-y-6 text-lg text-zinc-600 dark:text-zinc-400">
@@ -41,20 +37,20 @@ export default function AboutPage() {
                                 <div className="relative">
                                     <span className="absolute -left-[29px] top-1 h-3 w-3 rounded-full border-2 border-white bg-zinc-300 dark:border-zinc-950 dark:bg-zinc-700" />
                                     <h3 className="font-semibold">Senior Mobile Engineer</h3>
-                                    <p className="text-sm text-zinc-500">Tech Company Inc. • 2022 - Present</p>
-                                    <p className="mt-2 text-zinc-600 dark:text-zinc-400">Leading the mobile team in building cross-platform applications using React Native and native iOS/Android technologies.</p>
+                                    <p className="text-sm text-zinc-500">Global Logistics Tech • 2022 - Present</p>
+                                    <p className="mt-2 text-zinc-600 dark:text-zinc-400">Architected and shipped a real-time IoT tracking platform and cross-platform fleet management apps (Flutter/React Native), increasing driver efficiency by 30%.</p>
                                 </div>
                                 <div className="relative">
                                     <span className="absolute -left-[29px] top-1 h-3 w-3 rounded-full border-2 border-white bg-zinc-300 dark:border-zinc-950 dark:bg-zinc-700" />
-                                    <h3 className="font-semibold">Software Developer</h3>
-                                    <p className="text-sm text-zinc-500">Startup Co. • 2019 - 2022</p>
-                                    <p className="mt-2 text-zinc-600 dark:text-zinc-400">Full stack development with a focus on frontend performance and user experience.</p>
+                                    <h3 className="font-semibold">Software Engineer</h3>
+                                    <p className="text-sm text-zinc-500">Venture Studio Inc. • 2019 - 2022</p>
+                                    <p className="mt-2 text-zinc-600 dark:text-zinc-400">Developed high-performance productivity apps and scanning tools leveraging ML Kit and Firebase, scaling to over 100k active users.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="sticky top-32 space-y-8">
+                    <div className="lg:sticky lg:top-32 space-y-8">
                         <div className="relative aspect-square rotate-3 overflow-hidden rounded-3xl border border-zinc-200 bg-zinc-100 shadow-2xl transition-transform hover:rotate-0 dark:border-zinc-800 dark:bg-zinc-900">
                             <div className="absolute inset-0 bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-800 dark:to-zinc-900" />
                             <video
@@ -63,6 +59,8 @@ export default function AboutPage() {
                                 muted
                                 loop
                                 playsInline
+                                title="Video of Maninder"
+                                aria-label="A video introduction of Maninder Singh"
                                 className="absolute inset-0 h-full w-full object-cover"
                             />
                         </div>
@@ -79,6 +77,8 @@ export default function AboutPage() {
                     </div>
                 </div>
             </main>
+
+            <SiteFooter variant="default" />
         </div>
     );
 }

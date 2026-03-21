@@ -1,13 +1,50 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { travelLogs } from "@/lib/data/travel-logs";
 import { notFound } from "next/navigation";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { getTravelLogBySlug, getTravelLogs } from "@/lib/travel";
 import { TravelCallout } from "../_components/travel-callout";
 import { TravelVectorCover } from "../_components/travel-vector-cover";
+import { SiteNav } from "../../_components/site-nav";
+import { SiteFooter } from "../../_components/site-footer";
 import { Plane, Bus, Train, Car, Ship, MapPin, Calendar, Clock, ChevronLeft, ChevronRight } from "lucide-react";
+import { ShareButton } from "../../_components/share-button";
+
+const mdxComponents = {
+    TravelCallout,
+    h2: ({ children }: any) => (
+        <h2 className="mt-16 mb-8 text-3xl font-black tracking-tight text-zinc-900 dark:text-zinc-100 first:mt-0">
+            {children}
+        </h2>
+    ),
+    h3: ({ children }: any) => (
+        <h3 className="mt-10 mb-4 text-xl font-bold text-zinc-800 dark:text-zinc-200">
+            {children}
+        </h3>
+    ),
+    p: ({ children }: any) => (
+        <p className="mb-6 leading-relaxed text-zinc-600 dark:text-zinc-400 font-medium last:mb-0">
+            {children}
+        </p>
+    ),
+    ul: ({ children }: any) => (
+        <div className="space-y-3 mb-6">{children}</div>
+    ),
+    li: ({ children }: any) => (
+        <div className="flex gap-3 pl-2">
+            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
+            <p className="m-0 text-zinc-600 dark:text-zinc-400 font-medium">{children}</p>
+        </div>
+    ),
+    strong: ({ children }: any) => (
+        <strong className="font-bold text-zinc-900 dark:text-zinc-100">{children}</strong>
+    ),
+    // Define special callouts if needed, or use standard markdown and handle in content
+};
 
 export async function generateStaticParams() {
-  return travelLogs.map((log) => ({
+  const logs = getTravelLogs();
+  return logs.map((log) => ({
     slug: log.slug,
   }));
 }
@@ -18,7 +55,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const log = travelLogs.find((l) => l.slug === slug);
+  const log = getTravelLogBySlug(slug);
 
   if (!log) return {};
 
@@ -30,7 +67,7 @@ export async function generateMetadata({
       description: log.description || undefined,
       images: [
         {
-          url: `/api/og?title=${encodeURIComponent(log.title)}`, // Placeholder for potentially future OG generator
+          url: `/api/og?title=${encodeURIComponent(log.title)}`, 
           width: 1200,
           height: 630,
         },
@@ -45,7 +82,7 @@ export default async function TravelPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const log = travelLogs.find(l => l.slug === slug);
+  const log = getTravelLogBySlug(slug);
 
   if (!log) {
     notFound();
@@ -76,27 +113,31 @@ export default async function TravelPage({
   };
 
   return (
-    <div className="min-h-dvh bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
+    <div className="min-h-dvh bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 selection:bg-zinc-900 selection:text-white dark:selection:bg-zinc-100 dark:selection:text-zinc-900">
+      <SiteNav variant="default" />
+      
       {/* Hero Header */}
-      <div className="relative h-[65vh] w-full overflow-hidden">
+      <div className="relative h-[50vh] sm:h-[65vh] w-full overflow-hidden">
         <div className="absolute inset-0">
           <TravelVectorCover slug={log.slug} />
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-zinc-50 via-black/10 to-black/30 dark:from-zinc-950" />
 
-        <div className="absolute inset-x-0 top-0 z-50 p-6">
-          <Link
-            href="/#travel"
-            className="group inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/20 px-4 py-2 text-sm font-semibold text-white backdrop-blur-xl transition hover:bg-black/40"
-          >
-            <ChevronLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-            Explore More
-          </Link>
+        <div className="absolute inset-x-0 top-0 z-50 p-6 pointer-events-none">
+          <div className="mx-auto max-w-6xl flex justify-between items-center pointer-events-auto mt-20">
+             <Link
+                href="/#travel"
+                className="group inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/20 px-4 py-2 text-sm font-semibold text-white backdrop-blur-xl transition hover:bg-black/40"
+              >
+                <ChevronLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+                Explore More
+              </Link>
+          </div>
         </div>
 
         <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-          <div className="animate-slide-up space-y-6">
-            <div className="flex justify-center gap-3">
+          <div className="animate-slide-up space-y-4 sm:space-y-6 px-4">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
               <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-white backdrop-blur-md">
                 <span className={`h-2 w-2 rounded-full ${isUpcoming ? 'bg-blue-400' : 'bg-emerald-400'} animate-pulse`} />
                 {isUpcoming ? 'Planned Trip' : 'Completed Trip'}
@@ -106,12 +147,12 @@ export default async function TravelPage({
               </div>
             </div>
 
-            <h1 className="text-6xl font-black tracking-tighter text-white sm:text-9xl drop-shadow-2xl">
+            <h1 className="text-4xl font-black tracking-tighter text-white sm:text-6xl lg:text-9xl drop-shadow-2xl">
               {log.title}
             </h1>
 
             {log.description && (
-              <p className="mx-auto max-w-2xl text-xl font-medium text-white/90 sm:text-2xl drop-shadow-lg">
+              <p className="mx-auto max-w-2xl text-base font-medium text-white/90 sm:text-xl lg:text-2xl drop-shadow-lg">
                 {log.description}
               </p>
             )}
@@ -119,73 +160,19 @@ export default async function TravelPage({
         </div>
       </div>
 
-      <div className="mx-auto max-w-6xl px-6 -mt-32 relative z-10 pb-32">
-        <div className="grid gap-8 lg:grid-cols-[2.5fr_1fr]">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 -mt-16 sm:-mt-32 relative z-10 pb-16 sm:pb-32">
+        <div className="grid gap-6 sm:gap-8 lg:grid-cols-[2.5fr_1fr]">
           {/* Main Content Card */}
-          <div className="glass rounded-[2.5rem] bg-white/90 p-8 dark:bg-zinc-900/90 sm:p-14 shadow-2xl">
-            <div className="prose prose-lg prose-zinc max-w-none dark:prose-invert">
-              {log.content?.split('\n').map((line, i) => {
-                const trimmed = line.trim();
-
-                // Optimized Header Rendering
-                if (trimmed.startsWith('## ')) {
-                  return (
-                    <h2 key={i} className="mt-16 mb-8 text-3xl font-black tracking-tight text-zinc-900 dark:text-zinc-100 first:mt-0">
-                      {trimmed.replace('## ', '')}
-                    </h2>
-                  );
-                }
-
-                if (trimmed.startsWith('### ')) {
-                  return (
-                    <h3 key={i} className="mt-10 mb-4 text-xl font-bold text-zinc-800 dark:text-zinc-200">
-                      {trimmed.replace('### ', '')}
-                    </h3>
-                  );
-                }
-
-                // Callout Detection (Pro Tips / Usability / Logistics)
-                if (trimmed.toLowerCase().includes('pro tip') || trimmed.toLowerCase().includes('usability') || trimmed.toLowerCase().includes('logistics')) {
-                  const type = trimmed.toLowerCase().includes('pro tip') ? 'tip' : 'info';
-                  return <TravelCallout key={i} type={type} title={trimmed.replace(/#+\s*/, '')}>{log.content?.split('\n')[i + 1]}</TravelCallout>
-                }
-
-                // Prevent rendering the line after a callout title since it's already in the callout
-                const prevLine = log.content?.split('\n')[i - 1]?.trim() || '';
-                if (prevLine.toLowerCase().includes('pro tip') || prevLine.toLowerCase().includes('usability') || prevLine.toLowerCase().includes('logistics')) {
-                  return null;
-                }
-
-                if (trimmed === '') return null;
-
-                // Simple Bullet Point Support
-                if (trimmed.startsWith('- ')) {
-                  return (
-                    <div key={i} className="flex gap-3 mb-3 pl-2">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
-                      <p className="m-0 text-zinc-600 dark:text-zinc-400 font-medium">{trimmed.replace('- ', '')}</p>
-                    </div>
-                  );
-                }
-
-                const parts = trimmed.split(/(\*\*.*?\*\*)/g);
-                return (
-                  <p key={i} className="mb-6 leading-relaxed text-zinc-600 dark:text-zinc-400 font-medium last:mb-0">
-                    {parts.map((part, j) => {
-                      if (part.startsWith('**') && part.endsWith('**')) {
-                        return <strong key={j} className="font-bold text-zinc-900 dark:text-zinc-100">{part.slice(2, -2)}</strong>;
-                      }
-                      return part;
-                    })}
-                  </p>
-                );
-              })}
-            </div>
+          <div className="glass rounded-2xl sm:rounded-[2.5rem] bg-white/90 p-5 sm:p-8 dark:bg-zinc-900/90 lg:p-14 shadow-2xl order-2 lg:order-1">
+            <article className="prose prose-lg prose-zinc max-w-none dark:prose-invert">
+                {log.content && <MDXRemote source={log.content} components={mdxComponents} />}
+            </article>
           </div>
 
+
           {/* Sidebar */}
-          <div className="space-y-6">
-            <div className="glass sticky top-24 space-y-8 rounded-[2rem] bg-white/90 p-8 dark:bg-zinc-900/90 shadow-xl">
+          <div className="space-y-6 order-1 lg:order-2">
+            <div className="glass lg:sticky lg:top-24 space-y-8 rounded-2xl sm:rounded-[2rem] bg-white/90 p-6 sm:p-8 dark:bg-zinc-900/90 shadow-xl">
               <div>
                 <h3 className="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-zinc-400">
                   Itinerary Overview
@@ -252,6 +239,13 @@ export default async function TravelPage({
                   </div>
                 </div>
               )}
+
+              <div className="pt-8 border-t border-zinc-100 dark:border-zinc-800">
+                <ShareButton 
+                    title={log.title} 
+                    url={`https://maninder.co.in/travel/${log.slug}`} 
+                />
+              </div>
             </div>
           </div>
         </div>
