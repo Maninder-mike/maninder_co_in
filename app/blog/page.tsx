@@ -8,7 +8,7 @@ import { BlogCardCover } from "./_components/blog-card-cover";
 
 export const metadata: Metadata = {
     title: "Blog | Maninder",
-    description: "Writings on software engineering, building products, and life.",
+    description: "Writings on building apps, creating products, and life.",
 };
 
 export default function BlogIndexPage() {
@@ -22,7 +22,7 @@ export default function BlogIndexPage() {
                 <header className="mb-16">
                     <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl">Writings</h1>
                     <p className="mt-4 text-lg text-zinc-600 dark:text-zinc-400">
-                        Thoughts on software engineering, products, and running.
+                        Thoughts on building apps, creating products, and running.
                     </p>
                 </header>
 

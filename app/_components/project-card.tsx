@@ -33,7 +33,7 @@ export function ProjectCard({ project, className = "", isFeatured = false }: Pro
 
     return (
         <div
-            className={`glass-premium group relative flex flex-col h-full rounded-3xl p-6 transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 ${gradientClass} ${className}`}
+            className={`glass-premium group relative flex flex-col h-full rounded-3xl p-6 transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 active:scale-[0.97] dark:hover:border-zinc-600/50 ${gradientClass} ${className}`}
         >
             <div className="flex flex-col h-full space-y-6 relative z-10">
                 <div className="flex items-start justify-between gap-4">

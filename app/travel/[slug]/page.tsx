@@ -9,6 +9,7 @@ import { SiteNav } from "../../_components/site-nav";
 import { SiteFooter } from "../../_components/site-footer";
 import { Plane, Bus, Train, Car, Ship, MapPin, Calendar, Clock, ChevronLeft, ChevronRight } from "lucide-react";
 import { ShareButton } from "../../_components/share-button";
+import { ReadingProgress } from "../../_components/reading-progress";
 
 const mdxComponents = {
     TravelCallout,
@@ -114,6 +115,7 @@ export default async function TravelPage({
 
   return (
     <div className="min-h-dvh bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 selection:bg-zinc-900 selection:text-white dark:selection:bg-zinc-100 dark:selection:text-zinc-900">
+      <ReadingProgress />
       <SiteNav variant="default" />
       
       {/* Hero Header */}

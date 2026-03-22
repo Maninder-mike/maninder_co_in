@@ -8,6 +8,7 @@ import { SiteFooter } from "../../_components/site-footer";
 import { MDXComponents } from "../_components/mdx";
 import { BlogCardCover } from "../_components/blog-card-cover";
 import { ShareButton } from "../../_components/share-button";
+import { ReadingProgress } from "../../_components/reading-progress";
 import { Calendar, Clock, ChevronLeft, User } from "lucide-react";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -44,6 +45,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
     return (
         <div className="min-h-dvh bg-zinc-50 text-zinc-900 selection:bg-zinc-900 selection:text-white dark:bg-zinc-950 dark:text-zinc-100 dark:selection:bg-zinc-100 dark:selection:text-zinc-900">
+            <ReadingProgress />
             <SiteNav variant="default" />
 
             {/* Hero Header */}

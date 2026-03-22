@@ -188,7 +188,7 @@ const sections = [
 
 export default function MilowPrivacyPage() {
     return (
-        <div className="min-h-dvh bg-white text-zinc-900 selection:bg-blue-100 selection:text-blue-900 dark:bg-zinc-950 dark:text-zinc-100 dark:selection:bg-blue-900 dark:selection:text-white">
+        <div className="min-h-dvh bg-zinc-50 text-zinc-900 selection:bg-blue-100 selection:text-blue-900 dark:bg-zinc-950 dark:text-zinc-100 dark:selection:bg-blue-900 dark:selection:text-white">
             {/* Background Pattern */}
             <div className="fixed inset-0 z-0 bg-grid-pattern opacity-[0.03] dark:opacity-[0.05] pointer-events-none" />
 

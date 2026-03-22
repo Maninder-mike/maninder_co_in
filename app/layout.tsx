@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import { ToastProvider } from "./_components/toast-provider";
+import { KonamiCode } from "./_components/konami-code";
 import { headers } from "next/headers";
 
 const geistSans = Geist({
@@ -57,6 +58,7 @@ export default async function RootLayout({
         {/* Prevent initial flash & set theme early */}
         <script
           nonce={nonce}
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
@@ -83,6 +85,7 @@ export default async function RootLayout({
           Skip to content
         </a>
         <ToastProvider>{children}</ToastProvider>
+        <KonamiCode />
         <Analytics />
         <SpeedInsights />
       </body>

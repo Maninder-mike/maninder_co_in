@@ -50,7 +50,7 @@ interface SiteFooterProps {
 export function SiteFooter({ variant = "default", productName, links }: SiteFooterProps) {
   if (variant === "product") {
     return (
-      <footer className="relative z-10 border-t border-zinc-200 bg-white py-12 dark:border-zinc-800 dark:bg-zinc-950">
+      <footer className="relative z-10 border-t border-zinc-200 bg-zinc-50 py-12 dark:border-zinc-800/30 dark:bg-black/80 dark:backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-6 sm:flex-row">
           <p className="text-sm text-zinc-500">© {new Date().getFullYear()} {productName || "Maninder"}. All rights reserved.</p>
           <div className="flex flex-wrap items-center justify-center gap-6 text-sm font-medium">
@@ -78,7 +78,7 @@ export function SiteFooter({ variant = "default", productName, links }: SiteFoot
   }
 
   return (
-    <footer className="relative z-10 border-t border-zinc-200 bg-white py-24 dark:border-zinc-800 dark:bg-zinc-950">
+    <footer className="relative z-10 border-t border-zinc-200 bg-zinc-50 py-24 dark:border-zinc-800/30 dark:bg-black/80 dark:backdrop-blur-xl">
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-16 lg:grid-cols-2">
           {/* Left: Newsletter CTA */}

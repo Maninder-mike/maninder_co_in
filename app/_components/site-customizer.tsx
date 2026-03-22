@@ -68,7 +68,7 @@ export function SiteCustomizer() {
           title={opt.label}
           className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold transition-all duration-200 ${
             theme === opt.value
-              ? "bg-white text-zinc-900 shadow-sm dark:bg-zinc-800 dark:text-zinc-100"
+              ? "bg-white text-zinc-900 shadow-sm ring-2 ring-blue-600 dark:bg-zinc-800 dark:text-zinc-100 dark:ring-blue-500"
               : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
           }`}
         >

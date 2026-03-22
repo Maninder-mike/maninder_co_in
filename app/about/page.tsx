@@ -4,7 +4,7 @@ import { SiteFooter } from "../_components/site-footer";
 
 export const metadata: Metadata = {
   title: "About | Maninder",
-  description: "Learn more about Maninder, a software engineer, traveler, and runner.",
+  description: "Learn more about Maninder, an app developer, traveler, and runner.",
 };
 
 export default function AboutPage() {
@@ -21,33 +21,17 @@ export default function AboutPage() {
                         </h1>
                         <div className="space-y-6 text-lg text-zinc-600 dark:text-zinc-400">
                             <p>
-                                I&apos;m Maninder, a software engineer with a passion for building intuitive, high-performance mobile and web applications. My journey in tech is driven by a curiosity to understand how things work and a desire to make them better.
+                                I&apos;m Maninder, an app developer with a passion for building fast, intuitive, and easy-to-use digital experiences. My journey in tech is driven by a curiosity to understand how things work and a desire to make them better.
                             </p>
                             <p>
-                                When I&apos;m not debugging complex systems, you can find me pounding the pavement training for my next marathon or exploring new corners of the globe. I believe in the balance of mental agility and physical endurance.
+                                When I&apos;m not solving tricky problems, you can find me pounding the pavement training for my next marathon or exploring new corners of the globe. I believe in the balance of mental agility and physical endurance.
                             </p>
                             <p>
-                                Whether it&apos;s shaving seconds off a 5K time or milliseconds off a page load, I&apos;m always chasing that next personal best.
+                                Whether it&apos;s shaving seconds off a 5K time or making an app feel instantly responsive, I&apos;m always chasing that next personal best.
                             </p>
                         </div>
 
-                        <div className="pt-8">
-                            <h2 className="mb-6 text-2xl font-bold tracking-tight">Experience</h2>
-                            <div className="space-y-8 border-l-2 border-zinc-200 pl-6 dark:border-zinc-800">
-                                <div className="relative">
-                                    <span className="absolute -left-[29px] top-1 h-3 w-3 rounded-full border-2 border-white bg-zinc-300 dark:border-zinc-950 dark:bg-zinc-700" />
-                                    <h3 className="font-semibold">Senior Mobile Engineer</h3>
-                                    <p className="text-sm text-zinc-500">Global Logistics Tech • 2022 - Present</p>
-                                    <p className="mt-2 text-zinc-600 dark:text-zinc-400">Architected and shipped a real-time IoT tracking platform and cross-platform fleet management apps (Flutter/React Native), increasing driver efficiency by 30%.</p>
-                                </div>
-                                <div className="relative">
-                                    <span className="absolute -left-[29px] top-1 h-3 w-3 rounded-full border-2 border-white bg-zinc-300 dark:border-zinc-950 dark:bg-zinc-700" />
-                                    <h3 className="font-semibold">Software Engineer</h3>
-                                    <p className="text-sm text-zinc-500">Venture Studio Inc. • 2019 - 2022</p>
-                                    <p className="mt-2 text-zinc-600 dark:text-zinc-400">Developed high-performance productivity apps and scanning tools leveraging ML Kit and Firebase, scaling to over 100k active users.</p>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
 
                     <div className="lg:sticky lg:top-32 space-y-8">
@@ -73,6 +57,26 @@ export default function AboutPage() {
                                 <li><a href="https://linkedin.com/in/maninder-mike" className="flex items-center hover:text-zinc-900 dark:hover:text-zinc-100">LinkedIn ↗</a></li>
                                 <li><a href="mailto:info@maninder.co.in" className="flex items-center hover:text-zinc-900 dark:hover:text-zinc-100">Email ↗</a></li>
                             </ul>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Easter Egg Hints */}
+                <div className="mt-24 rounded-2xl border border-dashed border-zinc-300 bg-zinc-100/50 p-8 dark:border-zinc-700 dark:bg-zinc-900/30">
+                    <h3 className="mb-1 text-xs font-bold uppercase tracking-[0.2em] text-zinc-400">🥚 Secrets</h3>
+                    <p className="mb-6 text-sm text-zinc-500 dark:text-zinc-500">This site has hidden easter eggs. Here are some hints&hellip;</p>
+                    <div className="grid gap-4 sm:grid-cols-2">
+                        <div className="rounded-xl bg-white/80 p-4 dark:bg-zinc-800/50">
+                            <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">🎮 The Classic Code</p>
+                            <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
+                                Gamers from the &apos;80s know this one. Up, up, down, down&hellip; you know the rest.
+                            </p>
+                        </div>
+                        <div className="rounded-xl bg-white/80 p-4 dark:bg-zinc-800/50">
+                            <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">🖱️ Click Happy</p>
+                            <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
+                                Ever clicked a logo more times than you should? Try it on mine. Five times fast.
+                            </p>
                         </div>
                     </div>
                 </div>

@@ -10,7 +10,7 @@ interface SiteNavProps {
 
 export function SiteNav({ variant = "default", githubUrl }: SiteNavProps) {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-zinc-200 bg-white/80 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/80">
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-zinc-200 bg-white/80 backdrop-blur-md dark:border-zinc-800/50 dark:bg-black/50">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         {variant === "default" && (
           <>
