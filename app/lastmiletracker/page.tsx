@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { JsonLd } from "../_components/json-ld";
-import { ArrowLeft, Github, Shield, Cpu, Zap, Signal, Map as MapIcon, Bell, CheckCircle2, Smartphone, Monitor, Bluetooth, Activity, Database, Wifi, Globe, Clock, Layers } from "lucide-react";
+import { ArrowLeft, Shield, Cpu, Zap, Signal, Map as MapIcon, Bell, CheckCircle2, Smartphone, Monitor, Bluetooth, Activity, Database, Wifi, Globe, Clock, Layers } from "lucide-react";
 import { HeroGraphic } from "./_components/hero-graphic";
 import { SiteNav } from "../_components/site-nav";
 import { SiteFooter } from "../_components/site-footer";

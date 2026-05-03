@@ -66,13 +66,6 @@ export async function generateMetadata({
     openGraph: {
       title: `${log.title} | Travel Log`,
       description: log.description || undefined,
-      images: [
-        {
-          url: `/api/og?title=${encodeURIComponent(log.title)}`, 
-          width: 1200,
-          height: 630,
-        },
-      ],
     },
   };
 }

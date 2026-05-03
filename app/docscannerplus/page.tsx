@@ -1,7 +1,7 @@
 
 import Link from "next/link";
 import { JsonLd } from "../_components/json-ld";
-import { ArrowLeft, Github, Scan, Smartphone, Wand2, Zap, Share2, Layers, Cloud, FileText, CheckCircle2, Shield } from "lucide-react";
+import { ArrowLeft, Scan, Smartphone, Wand2, Zap, Share2, Layers, Cloud, FileText, CheckCircle2, Shield } from "lucide-react";
 import { HeroImage } from "./_components/hero-image";
 import { BrandStrip } from "./_components/brand-strip";
 import { BentoCard } from "./_components/bento-card";

@@ -1,39 +1,53 @@
 "use server";
 
-import { Resend } from "resend";
+import { createClient } from "@supabase/supabase-js";
 import { ContactFormState } from "@/lib/contact";
 
 export async function submitContactForm(
   prevState: ContactFormState,
   formData: FormData
 ): Promise<ContactFormState> {
-  const name = formData.get("name") as string;
-  const email = formData.get("email") as string;
-  const message = formData.get("message") as string;
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+  const supabase = createClient(supabaseUrl, supabaseKey);
+
+  const name = formData.get("name")?.toString().trim();
+  const email = formData.get("email")?.toString().trim().toLowerCase();
+  const message = formData.get("message")?.toString().trim();
 
   if (!name || !email || !message) {
     return { status: "error", message: "Please fill in all fields." };
   }
 
-  const resendApiKey = process.env.RESEND_API_KEY;
-  if (!resendApiKey) {
-    console.error("Missing RESEND_API_KEY environment variable. Cannot send email.");
-    return { status: "error", message: "Messaging is currently unavailable. Please try again later." };
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  if (!emailOk) {
+    return { status: "error", message: "Enter a valid email address." };
   }
 
-  const resend = new Resend(resendApiKey);
-
   try {
-    const { error } = await resend.emails.send({
-      from: "Contact Form <onboarding@resend.dev>",
-      to: process.env.CONTACT_EMAIL_TO || "maninder_mike@yahoo.com",
-      replyTo: email,
-      subject: `New Contact Form Submission from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-    });
+    // Basic rate limiting: check if this email has submitted in the last 1 hour
+    const oneHourAgo = new Date();
+    oneHourAgo.setHours(oneHourAgo.getHours() - 1);
+
+    const { data: recentMessages, error: checkError } = await supabase
+      .from("contact_messages")
+      .select("id")
+      .eq("email", email)
+      .gte("created_at", oneHourAgo.toISOString());
+
+    if (checkError) {
+      console.error("Supabase rate limit check error:", checkError);
+      // Continue anyway if check fails, to avoid blocking legit users entirely
+    } else if (recentMessages && recentMessages.length > 0) {
+      return { status: "error", message: "You've already sent a message recently. Please wait a while before sending another." };
+    }
+
+    const { error } = await supabase
+      .from("contact_messages")
+      .insert([{ name, email, message }]);
 
     if (error) {
-      console.error("Resend API error:", error);
+      console.error("Supabase insert error:", error);
       return { status: "error", message: "Failed to send message. Please try again later." };
     }
 

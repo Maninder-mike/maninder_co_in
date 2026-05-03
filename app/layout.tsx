@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import { ToastProvider } from "./_components/toast-provider";
 import { KonamiCode } from "./_components/konami-code";
-import { headers } from "next/headers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,6 +18,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://maninder.co.in"),
@@ -32,54 +38,42 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://maninder.co.in",
     siteName: "Maninder",
+    images: [
+      {
+        url: "/api/og",
+        width: 1200,
+        height: 630,
+        alt: "Maninder | Mobile Dev, Traveler & Runner",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Maninder | Mobile Dev, Traveler & Runner",
     description:
       "iOS & Android apps, travel log, running snapshot and build-in-progress features.",
+    images: ["/api/og"],
   },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const nonce = (await headers()).get("x-nonce") ?? "";
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        {/* Responsive meta */}
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, viewport-fit=cover"
-        />
-        {/* Prevent initial flash & set theme early */}
-        <script
-          nonce={nonce}
-          suppressHydrationWarning
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  const stored = localStorage.getItem('theme');
-                  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  
-                  if (stored === 'dark' || ((!stored || stored === 'system') && prefersDark)) {
-                    document.documentElement.classList.add('dark');
-                  }
-                } catch (_) {}
-              })();
-            `,
-          }}
-        />
-      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <a 
-          href="#main-content" 
+        {/* Prevent FOUC — must run before first paint */}
+        <Script
+          id="theme-initializer"
+          src="/theme-init.js"
+          strategy="beforeInteractive"
+        />
+        <a
+          href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-zinc-900 focus:shadow-2xl focus:outline-none dark:focus:bg-zinc-900 dark:focus:text-white"
         >
           Skip to content

@@ -10,6 +10,7 @@ import { CursorGlow } from "./_components/cursor-glow";
 import { projects } from "@/lib/data/projects";
 import { getTravelLogs } from "@/lib/travel";
 import { TravelVectorCover } from "./travel/_components/travel-vector-cover";
+import { RunningStats } from "./_components/running-stats";
 
 
 
@@ -140,9 +141,41 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Running Stats Section */}
+      <ScrollReveal>
+        <RunningStats />
+      </ScrollReveal>
 
-
-
+      {/* CTA Section */}
+      <section className="relative z-10 mx-auto max-w-6xl px-6 py-24 sm:py-32">
+        <ScrollReveal>
+          <div className="relative overflow-hidden rounded-[3rem] bg-zinc-900 px-6 py-20 text-center shadow-2xl dark:bg-zinc-950 sm:px-16 sm:py-32">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-transparent to-violet-500/20 opacity-50 blur-3xl"></div>
+            <div className="relative mx-auto max-w-2xl">
+              <h2 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">
+                Have a project in mind?
+              </h2>
+              <p className="mx-auto mt-6 max-w-xl text-lg text-zinc-300">
+                Whether it's a mobile app, web platform, or something completely new, let's build something exceptional together.
+              </p>
+              <div className="mt-10 flex items-center justify-center gap-x-6">
+                <Link
+                  href="/contact"
+                  className="rounded-full bg-white px-8 py-4 text-sm font-semibold text-zinc-900 shadow-sm transition-all hover:scale-105 hover:bg-zinc-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                  Get in touch
+                </Link>
+                <Link
+                  href="/#work"
+                  className="text-sm font-semibold leading-6 text-white transition-colors hover:text-zinc-300"
+                >
+                  View more work <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
+      </section>
 
       </main>
 

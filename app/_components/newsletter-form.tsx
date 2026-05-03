@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useRef, useState } from "react";
+import { useActionState, useEffect, useRef } from "react";
 import { useFormStatus } from "react-dom";
 import { useToast } from "./toast-provider";
 
@@ -90,69 +90,6 @@ export default function NewsletterForm({ action }: Props) {
     }
   }, [state, showToast]);
 
-  return <AutoLocationForm formAction={formAction} />;
-}
-
-// Separate component to encapsulate geolocation logic
-function AutoLocationForm({
-  formAction,
-}: {
-  formAction: (fd: FormData) => void;
-}) {
-  const [loc, setLoc] = useState<string>("");
-  const [locStatus, setLocStatus] = useState<"idle" | "getting" | "ok" | "err">(
-    "idle"
-  );
-
-  useEffect(() => {
-    let cancelled = false;
-    async function resolveLocation() {
-      setLocStatus("getting");
-      // Try Geolocation API
-      if (navigator.geolocation) {
-        const geo = await new Promise<{ success: boolean; value?: string }>(
-          (res) => {
-            navigator.geolocation.getCurrentPosition(
-              async (pos) => {
-                try {
-                  const { latitude, longitude } = pos.coords;
-                  // Reverse geocoding would normally call an external API; we avoid that here.
-                  // Store as lat,long with timezone so backend can enrich later.
-                  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-                  res({
-                    success: true,
-                    value: `${latitude.toFixed(3)},${longitude.toFixed(
-                      3
-                    )}|${tz}`,
-                  });
-                } catch {
-                  res({ success: false });
-                }
-              },
-              () => res({ success: false }),
-              { enableHighAccuracy: false, timeout: 5000, maximumAge: 600000 }
-            );
-          }
-        );
-        if (geo.success && !cancelled) {
-          setLoc(geo.value || "");
-          setLocStatus("ok");
-          return;
-        }
-      }
-      // Fallback: timezone only
-      if (!cancelled) {
-        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-        setLoc(tz);
-        setLocStatus("err");
-      }
-    }
-    resolveLocation();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
   return (
     <form id="newsletter-form" action={formAction} className="space-y-3">
       <div className="flex gap-2 max-sm:flex-col">
@@ -163,8 +100,6 @@ function AutoLocationForm({
           placeholder="you@example.com"
           className="w-full sm:w-1/2 rounded-full border border-zinc-300 bg-white px-4 py-2 text-xs text-zinc-900 outline-none transition focus:border-zinc-500 focus:ring-2 focus:ring-zinc-200 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:focus:border-zinc-500"
         />
-        {/* Hidden auto location field */}
-        <input type="hidden" name="location" value={loc} />
         <Submit />
       </div>
       <p className="text-[11px] text-zinc-400">

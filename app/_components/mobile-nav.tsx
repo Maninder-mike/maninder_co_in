@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X, Twitter, Github, Linkedin } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { TwitterIcon, GithubIcon, LinkedinIcon } from "./social-icons";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function MobileNav() {
@@ -83,12 +84,12 @@ export function MobileNav() {
                                     <div className="space-y-4">
                                         <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-500">Socials</h4>
                                         <div className="flex gap-6">
-                                            <a href="https://x.com/maninder_mike" className="text-zinc-600 dark:text-zinc-400 hover:text-blue-600 transition-colors"><Twitter size={20} /></a>
-                                            <a href="https://github.com/maninder-mike" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 transition-colors"><Github size={20} /></a>
-                                            <a href="https://linkedin.com/in/maninder-mike" className="text-zinc-600 dark:text-zinc-400 hover:text-blue-700 transition-colors"><Linkedin size={20} /></a>
+                                            <a href="https://x.com/maninder_mike" className="text-zinc-600 dark:text-zinc-400 hover:text-blue-600 transition-colors"><TwitterIcon className="h-5 w-5" /></a>
+                                            <a href="https://github.com/maninder-mike" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 transition-colors"><GithubIcon className="h-5 w-5" /></a>
+                                            <a href="https://linkedin.com/in/maninder-mike" className="text-zinc-600 dark:text-zinc-400 hover:text-blue-700 transition-colors"><LinkedinIcon className="h-5 w-5" /></a>
                                         </div>
                                     </div>
-                                    <p className="text-xs text-zinc-500">© {new Date().getFullYear()} Maninder</p>
+                                    <p suppressHydrationWarning className="text-xs text-zinc-500">© {new Date().getFullYear()} Maninder</p>
                                 </div>
                             </div>
                         </motion.div>

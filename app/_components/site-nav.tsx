@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ArrowLeft, Github } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import { GithubIcon } from "./social-icons";
 import { LogoAnimator } from "./logo-animator";
 import { MobileNav } from "./mobile-nav";
 
@@ -39,7 +40,7 @@ export function SiteNav({ variant = "default", githubUrl }: SiteNavProps) {
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-100 px-4 py-2 text-sm font-medium transition-colors hover:bg-zinc-200 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:bg-zinc-800"
                 >
-                  <Github className="h-4 w-4" />
+                  <GithubIcon className="h-4 w-4" />
                   <span>GitHub</span>
                 </a>
               )}

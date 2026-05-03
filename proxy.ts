@@ -1,16 +1,17 @@
 import { NextResponse, NextRequest } from 'next/server';
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const nonce = Buffer.from(crypto.randomUUID()).toString('base64');
   
   // Construct dynamic CSP
+  const isDev = process.env.NODE_ENV !== 'production';
   const cspHeader = `
     default-src 'self';
-    script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' va.vercel-scripts.com;
+    script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'unsafe-inline' va.vercel-scripts.com ${isDev ? "'unsafe-eval'" : ""};
     style-src 'self' 'nonce-${nonce}' 'unsafe-inline';
     img-src 'self' blob: data:;
     font-src 'self' data:;
-    connect-src 'self' va.vercel-scripts.com;
+    connect-src 'self' va.vercel-scripts.com *.supabase.co;
     frame-ancestors 'none';
     base-uri 'self';
     form-action 'self';

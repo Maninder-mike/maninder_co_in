@@ -1,8 +1,8 @@
-
 import Link from "next/link";
 import { JsonLd } from "../_components/json-ld";
 import Image from "next/image";
-import { ArrowLeft, Github, Shield, Truck, Vibrate, Zap, Monitor, Smartphone, Bell, CheckCircle2, Timer, FileX, EyeOff, BarChart3, TrendingUp } from "lucide-react";
+import { ArrowLeft, Shield, Truck, Vibrate, Zap, Monitor, Smartphone, Bell, CheckCircle2, Timer, FileX, EyeOff, BarChart3, TrendingUp, Terminal } from "lucide-react";
+import { GithubIcon } from "../_components/social-icons";
 import { HeroImage } from "./_components/hero-image";
 import { BrandStrip } from "./_components/brand-strip";
 import { BentoCard } from "./_components/bento-card";
@@ -61,13 +61,13 @@ export default function MilowPage() {
 
                     <div className="flex flex-wrap gap-4 pt-4">
                         <a
-                            href="https://github.com/Maninder-mike/milow"
+                            href="https://github.com/maninder-mike/milow"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="group inline-flex items-center gap-2 rounded-full bg-zinc-900 px-8 py-4 text-sm font-semibold text-white shadow-xl shadow-zinc-900/20 transition-all hover:scale-105 hover:bg-zinc-800 active:scale-95 dark:bg-white dark:text-zinc-900 dark:shadow-white/10 dark:hover:bg-zinc-100"
                         >
-                            <Github className="h-5 w-5 transition-transform group-hover:rotate-12" />
-                            Start Building
+                            <GithubIcon className="h-5 w-5 transition-transform group-hover:rotate-12" />
+                            View Source
                         </a>
                         <Link
                             href="/milow/privacypolicy"
@@ -266,7 +266,7 @@ export default function MilowPage() {
                     <div className="grid gap-8 md:grid-cols-3">
                         {[
                             { platform: "Android", icon: Smartphone, title: "Mobile Fleet", desc: "Native experience for drivers on the road. Play Store ready." },
-                            { platform: "macOS", icon: Github, title: "Terminal CLI", desc: "Automate your data with our Homebrew-powered command line tool." },
+                            { platform: "macOS", icon: Terminal, title: "Terminal CLI", desc: "Automate your data with our Homebrew-powered command line tool." },
                             { platform: "Windows", icon: Monitor, title: "Command Center", desc: "Full-resolution dispatch management via Microsoft Store." },
                         ].map((item, i) => (
                             <div key={i} className="glass p-8 rounded-3xl space-y-4">

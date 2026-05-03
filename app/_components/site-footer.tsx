@@ -9,22 +9,7 @@ const SiteCustomizer = dynamic(() =>
   import("./site-customizer").then((mod) => mod.SiteCustomizer)
 );
 
-async function subscribeAction(
-  _prev: NewsletterState,
-  formData: FormData
-): Promise<NewsletterState> {
-  const email = formData.get("email")?.toString().trim().toLowerCase();
-
-  if (!email) return { status: "error", message: "Email is required" };
-
-  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  if (!emailOk) return { status: "error", message: "Enter a valid email" };
-
-  return {
-    status: "success",
-    message: "Thanks! You're subscribed to updates.",
-  };
-}
+import { subscribeAction } from "@/app/actions/newsletter";
 
 const socialLinks = [
   { label: "Twitter / X", href: "https://x.com/maninder_mike" },
@@ -52,7 +37,7 @@ export function SiteFooter({ variant = "default", productName, links }: SiteFoot
     return (
       <footer className="relative z-10 border-t border-zinc-200 bg-zinc-50 py-12 dark:border-zinc-800/30 dark:bg-black/80 dark:backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-6 sm:flex-row">
-          <p className="text-sm text-zinc-500">© {new Date().getFullYear()} {productName || "Maninder"}. All rights reserved.</p>
+          <p suppressHydrationWarning className="text-sm text-zinc-500">© {new Date().getFullYear()} {productName || "Maninder"}. All rights reserved.</p>
           <div className="flex flex-wrap items-center justify-center gap-6 text-sm font-medium">
             {links && links.length > 0 ? (
               links.map((link) =>
@@ -133,7 +118,7 @@ export function SiteFooter({ variant = "default", productName, links }: SiteFoot
 
         {/* Bottom bar */}
         <div className="mt-24 flex flex-col items-center justify-between gap-6 border-t border-zinc-200 pt-8 sm:flex-row dark:border-zinc-800">
-          <p className="text-sm text-zinc-500">© {new Date().getFullYear()} Maninder. All rights reserved.</p>
+          <p suppressHydrationWarning className="text-sm text-zinc-500">© {new Date().getFullYear()} Maninder. All rights reserved.</p>
           <SiteCustomizer />
           <p className="text-sm text-zinc-500">Built in Canada 🇨🇦</p>
         </div>
