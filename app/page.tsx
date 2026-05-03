@@ -39,8 +39,8 @@ export default async function Home() {
       {/* Background Grid */}
       <div className="fixed inset-0 z-0 pointer-events-none bg-grid-pattern opacity-50 dark:opacity-[0.15]"></div>
 
-      {/* Ambient Orbs (Premium Dark Mode Effect) */}
-      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden opacity-0 dark:opacity-100 transition-opacity duration-1000">
+      {/* Ambient Orbs (Premium Dark Mode Effect) - Hidden on mobile for performance */}
+      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden opacity-0 dark:opacity-100 transition-opacity duration-1000 hidden md:block">
         <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-600/20 blur-[120px] mix-blend-screen animate-blob" />
         <div className="absolute top-[40%] right-[-10%] w-[50%] h-[50%] rounded-full bg-purple-600/20 blur-[120px] mix-blend-screen animate-blob animation-delay-2000" />
         <div className="absolute bottom-[-20%] left-[20%] w-[50%] h-[50%] rounded-full bg-emerald-600/10 blur-[120px] mix-blend-screen animate-blob animation-delay-4000" />
@@ -53,20 +53,20 @@ export default async function Home() {
         {/* Hero Section */}
         <section className="relative z-10 mx-auto flex min-h-[85vh] max-w-6xl flex-col justify-center px-6 pt-20">
         <div className="max-w-4xl space-y-8">
-          <ScrollReveal>
+          <div className="animate-page-enter">
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl lg:text-7xl xl:text-9xl leading-[0.9]">
               Engineering <br />
               <span className="text-gradient">
                 The Journey.
               </span>
             </h1>
-          </ScrollReveal>
+          </div>
 
-          <ScrollReveal delay={200}>
+          <div className="animate-page-enter" style={{ animationDelay: '200ms', animationFillMode: 'both' }}>
             <p className="max-w-3xl text-base sm:text-lg lg:text-2xl leading-relaxed text-zinc-600 dark:text-zinc-400 font-medium">
               App Developer & World Traveler. I build easy-to-use digital products by day and explore global trails by foot, merging creative problem-solving with a passion for exploration.
             </p>
-          </ScrollReveal>
+          </div>
         </div>
       </section>
 

@@ -7,6 +7,7 @@ export function HeroImage() {
                 src="/docscanner-app.webp"
                 alt="DocScanner Plus UI"
                 fill
+                sizes="(max-width: 1024px) 100vw, 600px"
                 className="object-cover"
                 priority
             />

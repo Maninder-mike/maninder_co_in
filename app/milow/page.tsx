@@ -265,12 +265,12 @@ export default function MilowPage() {
                     <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl text-center mb-16">One Platform, Every Device</h2>
                     <div className="grid gap-8 md:grid-cols-3">
                         {[
-                            { platform: "Android", icon: Smartphone, title: "Mobile Fleet", desc: "Native experience for drivers on the road. Play Store ready." },
-                            { platform: "macOS", icon: Terminal, title: "Terminal CLI", desc: "Automate your data with our Homebrew-powered command line tool." },
-                            { platform: "Windows", icon: Monitor, title: "Command Center", desc: "Full-resolution dispatch management via Microsoft Store." },
+                            { platform: "Android", icon: Smartphone, title: "Mobile Fleet", desc: "Native experience for drivers on the road. Play Store ready.", colorClass: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400" },
+                            { platform: "macOS", icon: Terminal, title: "Terminal CLI", desc: "Automate your data with our Homebrew-powered command line tool.", colorClass: "bg-zinc-200 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-200" },
+                            { platform: "Windows", icon: Monitor, title: "Command Center", desc: "Full-resolution dispatch management via Microsoft Store.", colorClass: "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-400" },
                         ].map((item, i) => (
                             <div key={i} className="glass p-8 rounded-3xl space-y-4">
-                                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-zinc-900 dark:bg-white dark:text-zinc-900">
+                                <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${item.colorClass}`}>
                                     <item.icon className="h-6 w-6" />
                                 </div>
                                 <h3 className="text-2xl font-bold">{item.platform} {item.title}</h3>

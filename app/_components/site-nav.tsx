@@ -2,7 +2,11 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { GithubIcon } from "./social-icons";
 import { LogoAnimator } from "./logo-animator";
-import { MobileNav } from "./mobile-nav";
+import dynamic from "next/dynamic";
+
+const MobileNav = dynamic(() => import("./mobile-nav").then(m => m.MobileNav), {
+  loading: () => <div className="sm:hidden p-2"><span className="sr-only">Menu</span></div>,
+});
 
 interface SiteNavProps {
   variant?: "default" | "product";

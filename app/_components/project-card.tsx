@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { Box, Sparkles, Truck, Globe, Scan, ExternalLink, Clapperboard } from "lucide-react";
 import { Project } from "@/lib/types";

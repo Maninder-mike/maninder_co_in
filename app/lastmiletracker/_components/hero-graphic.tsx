@@ -9,6 +9,8 @@ export function HeroGraphic() {
                 fill
                 className="object-cover"
                 priority
+                sizes="(max-width: 1024px) 100vw, 600px"
+                quality={80}
             />
         </div>
     );
