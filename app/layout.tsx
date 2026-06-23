@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script";
+import dynamic from "next/dynamic";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import { ToastProvider } from "./_components/toast-provider";
-import { KonamiCode } from "./_components/konami-code";
+
+const KonamiCode = dynamic(() => import("./_components/konami-code").then((mod) => mod.KonamiCode));
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -63,14 +64,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://va.vercel-analytics.com" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {/* Prevent FOUC — must run before first paint */}
-        <Script
+        <script
           id="theme-initializer"
-          src="/theme-init.js"
-          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia('(prefers-color-scheme:dark)').matches;if(s==='dark'||(!s||s==='system')&&d){document.documentElement.classList.add('dark')}}catch(e){}})();`
+          }}
         />
         <a
           href="#main-content"

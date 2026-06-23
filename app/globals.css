@@ -24,6 +24,10 @@ body {
   font-feature-settings: "rlig" 1, "calt" 1;
   scroll-behavior: smooth;
   transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: contain;
 }
 
 /* Utility classes (kept simple; rely on Tailwind for most styling) */
@@ -95,7 +99,6 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.08);
   transition: background-color 0.3s ease, border-color 0.3s ease;
   background-color: rgba(255, 255, 255, 0.03);
-  will-change: backdrop-filter;
 }
 
 .dark .glass {
@@ -199,4 +202,294 @@ body {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
   }
+
+  /* Disable gradient pseudo-elements on mobile — saves compositing layers */
+  .glass-premium::before {
+    display: none;
+  }
+
+  /* Lighter grid pattern on mobile */
+  .bg-grid-pattern {
+    background-size: 32px 32px;
+  }
 }
+
+/* Content-visibility for off-screen sections — skips rendering until scrolled into view */
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
+/* Disable heavy animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-marquee,
+  .animate-blob,
+  .animate-ping {
+    animation: none !important;
+  }
+}
+
+/* Disable hover-dependent effects on touch-only devices */
+@media (hover: none) {
+  .glass-premium:hover::before {
+    opacity: 0;
+  }
+
+  .glass-premium {
+    transition: none;
+  }
+}
+
+/* Optimize touch scrolling in scroll containers */
+.overflow-hidden {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ==========================================================================
+   Phase 1 & 2: Futuristic UI & Performance Enhancements
+   ========================================================================== */
+
+/* 1. CSS Scroll-Driven Animations (Progressive Enhancement) */
+@keyframes scroll-reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scroll-reveal-down {
+  from {
+    opacity: 0;
+    transform: translateY(-32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scroll-reveal-left {
+  from {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scroll-reveal-right {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal-on-scroll {
+      animation-fill-mode: both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 25%;
+    }
+    
+    .reveal-up {
+      animation-name: scroll-reveal-up;
+    }
+    .reveal-down {
+      animation-name: scroll-reveal-down;
+    }
+    .reveal-left {
+      animation-name: scroll-reveal-left;
+    }
+    .reveal-right {
+      animation-name: scroll-reveal-right;
+    }
+  }
+}
+
+/* 2. Global Noise Grain Overlay (Desktop Only) */
+@media (min-width: 769px) {
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.02;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+}
+
+/* 3. Hero Animated Gradient Text */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.text-gradient-animated {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-size: 200% auto;
+  background-image: linear-gradient(to right, var(--color-zinc-900), var(--color-zinc-500), var(--color-zinc-900));
+  animation: gradient-shift 6s ease infinite;
+}
+
+.dark .text-gradient-animated {
+  background-image: linear-gradient(135deg, #ffffff 0%, #a1a1aa 50%, #ffffff 100%);
+}
+
+/* 4. Project Cards Conic Gradient Glowing Border on Hover */
+@property --card-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes spin-angle {
+  from {
+    --card-angle: 0deg;
+  }
+  to {
+    --card-angle: 360deg;
+  }
+}
+
+.card-glow-border {
+  position: relative;
+}
+
+.card-glow-border::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: var(--radius-xl);
+  background: conic-gradient(
+    from var(--card-angle),
+    transparent 40%,
+    rgba(59, 130, 246, 0.3) 60%,
+    rgba(168, 85, 247, 0.3) 75%,
+    rgba(6, 182, 212, 0.3) 90%,
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  animation: spin-angle 6s linear infinite;
+  pointer-events: none;
+}
+
+.card-glow-border:hover::after {
+  opacity: 1;
+}
+
+/* 5. Running Stats CSS-Only Counters */
+@property --num {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: false;
+}
+
+@keyframes count-up {
+  from {
+    --num: 0;
+  }
+  to {
+    --num: var(--num-target, 100);
+  }
+}
+
+.reveal-counter {
+  animation: count-up 2s cubic-bezier(0.1, 0.8, 0.2, 1) forwards;
+  counter-reset: num var(--num, var(--num-target));
+}
+
+.reveal-counter::after {
+  content: counter(num);
+}
+
+/* 6. Glitch text effect for 404/Error pages */
+@keyframes glitch-1 {
+  0%, 100% { clip-path: inset(40% 0 61% 0); }
+  20% { clip-path: inset(92% 0 1% 0); }
+  40% { clip-path: inset(25% 0 58% 0); }
+  60% { clip-path: inset(76% 0 5% 0); }
+  80% { clip-path: inset(3% 0 81% 0); }
+}
+
+@keyframes glitch-2 {
+  0%, 100% { clip-path: inset(12% 0 85% 0); }
+  20% { clip-path: inset(48% 0 24% 0); }
+  40% { clip-path: inset(83% 0 10% 0); }
+  60% { clip-path: inset(5% 0 76% 0); }
+  80% { clip-path: inset(62% 0 31% 0); }
+}
+
+.glitch-container {
+  position: relative;
+}
+
+.glitch-text {
+  position: relative;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--background);
+}
+
+.glitch-text::before {
+  left: 2px;
+  text-shadow: -1px 0 #3b82f6;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-1 5s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  left: -2px;
+  text-shadow: -1px 0 #ef4444, 0 1px #ef4444;
+  clip: rect(85px, 450px, 140px, 0);
+  animation: glitch-2 5s infinite linear alternate-reverse;
+}
+
+@keyframes aurora-bg {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-aurora {
+  background-size: 200% 200%;
+  animation: aurora-bg 15s ease infinite;
+}
+

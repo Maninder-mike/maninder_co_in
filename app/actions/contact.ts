@@ -13,15 +13,22 @@ export async function submitContactForm(
 
   const name = formData.get("name")?.toString().trim();
   const email = formData.get("email")?.toString().trim().toLowerCase();
+  const subject = formData.get("subject")?.toString().trim();
   const message = formData.get("message")?.toString().trim();
 
-  if (!name || !email || !message) {
+  if (!name || !email || !subject || !message) {
     return { status: "error", message: "Please fill in all fields." };
   }
 
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   if (!emailOk) {
     return { status: "error", message: "Enter a valid email address." };
+  }
+
+  // Import CONTACT_SUBJECTS inside or outside, but let's make sure it's validated
+  const { CONTACT_SUBJECTS } = await import("@/lib/contact");
+  if (!CONTACT_SUBJECTS.includes(subject as any)) {
+    return { status: "error", message: "Invalid subject selected." };
   }
 
   try {
@@ -44,7 +51,7 @@ export async function submitContactForm(
 
     const { error } = await supabase
       .from("contact_messages")
-      .insert([{ name, email, message }]);
+      .insert([{ name, email, subject, message }]);
 
     if (error) {
       console.error("Supabase insert error:", error);

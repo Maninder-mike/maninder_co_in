@@ -1,7 +1,5 @@
 import Link from "next/link";
 import { JsonLd } from "./_components/json-ld";
-import Image from "next/image";
-import { LogoAnimator } from "./_components/logo-animator";
 import { ProjectCard } from "./_components/project-card";
 import { SiteNav } from "./_components/site-nav";
 import { SiteFooter } from "./_components/site-footer";
@@ -30,7 +28,6 @@ export default async function Home() {
           jobTitle: "Mobile Engineer",
           sameAs: [
             "https://github.com/maninder-mike",
-            "https://linkedin.com/in/maninder-mike",
             "https://x.com/maninder_mike",
           ],
         }}
@@ -56,7 +53,7 @@ export default async function Home() {
           <div className="animate-page-enter">
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl lg:text-7xl xl:text-9xl leading-[0.9]">
               Engineering <br />
-              <span className="text-gradient">
+              <span className="text-gradient-animated">
                 The Journey.
               </span>
             </h1>
@@ -156,7 +153,7 @@ export default async function Home() {
                 Have a project in mind?
               </h2>
               <p className="mx-auto mt-6 max-w-xl text-lg text-zinc-300">
-                Whether it's a mobile app, web platform, or something completely new, let's build something exceptional together.
+                Whether it&apos;s a mobile app, web platform, or something completely new, let&apos;s build something exceptional together.
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6">
                 <Link

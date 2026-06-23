@@ -50,7 +50,7 @@ export default function MilowPage() {
                         Enterprise Logistics Platform
                     </div>
 
-                    <h1 className="text-6xl font-bold tracking-tighter sm:text-7xl xl:text-8xl">
+                    <h1 className="text-4xl font-bold tracking-tighter sm:text-6xl lg:text-7xl xl:text-8xl">
                         Logistics OS <br />
                         <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">for the 1%.</span>
                     </h1>
@@ -90,7 +90,7 @@ export default function MilowPage() {
                     </div>
                 </div>
 
-                <div className="relative hidden lg:block">
+                <div className="relative mt-8 lg:mt-0">
                     <HeroImage />
                 </div>
             </section>
@@ -325,7 +325,7 @@ export default function MilowPage() {
                                 Milow is engineered for performance and reliability using the latest cross-platform technologies.
                             </p>
                         </div>
-                        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+                        <div className="grid grid-cols-2 gap-3 sm:gap-4 sm:grid-cols-4">
                             <TechItem name="Flutter 3.10+" />
                             <TechItem name="Supabase" />
                             <TechItem name="PostgreSQL" />
@@ -362,7 +362,7 @@ export default function MilowPage() {
 
 function TechItem({ name }: { name: string }) {
     return (
-        <div className="flex items-center justify-center rounded-lg border border-zinc-200 bg-white p-4 font-semibold text-zinc-700 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
+        <div className="flex items-center justify-center rounded-lg border border-zinc-200 bg-white p-3 sm:p-4 text-sm sm:text-base font-semibold text-zinc-700 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 break-words text-center">
             {name}
         </div>
     );

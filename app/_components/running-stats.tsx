@@ -57,6 +57,21 @@ export function RunningStats() {
   );
 }
 
+function StatValue({ value }: { value: string }) {
+  if (value.endsWith(" km")) {
+    const numStr = value.replace(" km", "").replace(",", "");
+    const num = parseInt(numStr, 10);
+    if (!isNaN(num)) {
+      return (
+        <span>
+          <span className="reveal-counter" style={{ "--num-target": num } as React.CSSProperties}></span> km
+        </span>
+      );
+    }
+  }
+  return <span>{value}</span>;
+}
+
 function StatCard({ icon, label, value, trend }: { icon: React.ReactNode; label: string; value: string; trend: string }) {
   return (
     <div className="group relative overflow-hidden rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm transition-all hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900">
@@ -69,7 +84,9 @@ function StatCard({ icon, label, value, trend }: { icon: React.ReactNode; label:
         
         <div className="space-y-1">
           <p className="text-sm font-medium text-zinc-500 dark:text-zinc-400">{label}</p>
-          <p className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">{value}</p>
+          <p className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+            <StatValue value={value} />
+          </p>
         </div>
         
         <div className="mt-4 flex items-center text-xs font-medium text-zinc-500 dark:text-zinc-400">
@@ -79,3 +96,4 @@ function StatCard({ icon, label, value, trend }: { icon: React.ReactNode; label:
     </div>
   );
 }
+
