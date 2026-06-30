@@ -101,7 +101,9 @@ export function ContactForm() {
               id="name"
               name="name"
               required
-              className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-900 placeholder-zinc-400 focus:border-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder-zinc-600 dark:focus:border-zinc-100 dark:focus:ring-zinc-100 transition-colors"
+              autoComplete="name"
+              autoCorrect="off"
+              className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-base sm:text-sm text-zinc-900 placeholder-zinc-400 focus:border-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder-zinc-600 dark:focus:border-zinc-100 dark:focus:ring-zinc-100 transition-colors"
               placeholder="John Doe"
             />
           </div>
@@ -114,7 +116,10 @@ export function ContactForm() {
               id="email"
               name="email"
               required
-              className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-900 placeholder-zinc-400 focus:border-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder-zinc-600 dark:focus:border-zinc-100 dark:focus:ring-zinc-100 transition-colors"
+              autoComplete="email"
+              autoCapitalize="none"
+              autoCorrect="off"
+              className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-base sm:text-sm text-zinc-900 placeholder-zinc-400 focus:border-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder-zinc-600 dark:focus:border-zinc-100 dark:focus:ring-zinc-100 transition-colors"
               placeholder="john@example.com"
             />
           </div>
@@ -132,7 +137,7 @@ export function ContactForm() {
               required
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
-              className="w-full appearance-none rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-900 focus:border-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:focus:border-zinc-100 dark:focus:ring-zinc-100 transition-colors cursor-pointer"
+              className="w-full appearance-none rounded-xl border border-zinc-200 bg-white px-4 py-3 text-base sm:text-sm text-zinc-900 focus:border-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:focus:border-zinc-100 dark:focus:ring-zinc-100 transition-colors cursor-pointer"
             >
               <option value="" disabled hidden>
                 Select a category...
@@ -175,7 +180,7 @@ export function ContactForm() {
             maxLength={MAX_CHARS}
             value={messageText}
             onChange={(e) => setMessageText(e.target.value)}
-            className="w-full resize-none rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-900 placeholder-zinc-400 focus:border-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder-zinc-600 dark:focus:border-zinc-100 dark:focus:ring-zinc-100 transition-colors"
+            className="w-full resize-none rounded-xl border border-zinc-200 bg-white px-4 py-3 text-base sm:text-sm text-zinc-900 placeholder-zinc-400 focus:border-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder-zinc-600 dark:focus:border-zinc-100 dark:focus:ring-zinc-100 transition-colors"
             placeholder="Tell me about your project, goals, or timeline..."
           />
         </div>

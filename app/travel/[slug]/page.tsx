@@ -158,7 +158,7 @@ export default async function TravelPage({
       <div className="mx-auto max-w-6xl px-4 sm:px-6 -mt-16 sm:-mt-32 relative z-10 pb-16 sm:pb-32">
         <div className="grid gap-6 sm:gap-8 lg:grid-cols-[2.5fr_1fr]">
           {/* Main Content Card */}
-          <div className="glass rounded-2xl sm:rounded-[2.5rem] bg-white/90 p-5 sm:p-8 dark:bg-zinc-900/90 lg:p-14 shadow-2xl order-2 lg:order-1">
+          <div className="glass rounded-2xl sm:rounded-[2.5rem] bg-white/90 p-5 sm:p-8 dark:bg-zinc-900/90 lg:p-14 shadow-2xl order-1 lg:order-1">
             <article className="prose prose-lg prose-zinc max-w-none dark:prose-invert">
                 {log.content && <MDXRemote source={log.content} components={mdxComponents} />}
             </article>
@@ -166,7 +166,7 @@ export default async function TravelPage({
 
 
           {/* Sidebar */}
-          <div className="space-y-6 order-1 lg:order-2">
+          <div className="space-y-6 order-2 lg:order-2">
             <div className="glass lg:sticky lg:top-24 space-y-8 rounded-2xl sm:rounded-[2rem] bg-white/90 p-6 sm:p-8 dark:bg-zinc-900/90 shadow-xl">
               <div>
                 <h3 className="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-zinc-400">

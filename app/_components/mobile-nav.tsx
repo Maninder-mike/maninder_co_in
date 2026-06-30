@@ -29,7 +29,7 @@ export function MobileNav() {
         <div className="sm:hidden">
             <button
                 onClick={() => setIsOpen(true)}
-                className="p-2 text-zinc-900 dark:text-zinc-100"
+                className="p-3 text-zinc-900 dark:text-zinc-100 transition-transform active:scale-95"
                 aria-label="Open menu"
             >
                 <Menu size={24} />
