@@ -8,7 +8,6 @@ import { CursorGlow } from "./_components/cursor-glow";
 import { projects } from "@/lib/data/projects";
 import { getTravelLogs } from "@/lib/travel";
 import { TravelVectorCover } from "./travel/_components/travel-vector-cover";
-import { RunningStats } from "./_components/running-stats";
 
 
 
@@ -117,11 +116,11 @@ export default async function Home() {
               <a
                 key={place.slug}
                 href={`/travel/${place.slug}`}
-                className="group relative aspect-[4/5] overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-900"
+                className="group relative aspect-[4/5] overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-900 isolate"
               >
-                <TravelVectorCover slug={place.slug} className="transition-transform duration-500 group-hover:scale-105" />
+                <TravelVectorCover slug={place.slug} className="z-10 transition-transform duration-500 group-hover:scale-105" />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-6 flex flex-col justify-end">
+                <div className="absolute inset-0 z-20 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-6 flex flex-col justify-end">
                   <h3 className="text-xl font-bold text-white">{place.title}</h3>
                   <span className="mt-2 inline-block translate-y-4 text-xs font-medium text-white/80 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                     View Gallery →
@@ -137,11 +136,6 @@ export default async function Home() {
           )}
         </div>
       </section>
-
-      {/* Running Stats Section */}
-      <ScrollReveal>
-        <RunningStats />
-      </ScrollReveal>
 
       {/* CTA Section */}
       <section className="relative z-10 mx-auto max-w-6xl px-6 py-24 sm:py-32">

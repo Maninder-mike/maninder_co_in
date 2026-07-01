@@ -112,11 +112,11 @@ export default async function TravelPage({
       <SiteNav variant="default" />
       
       {/* Hero Header */}
-      <div className="relative h-[50vh] sm:h-[65vh] w-full overflow-hidden">
-        <div className="absolute inset-0">
+      <div className="relative h-[50vh] sm:h-[65vh] w-full overflow-hidden isolate">
+        <div className="absolute inset-0 z-10">
           <TravelVectorCover slug={log.slug} />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-50 via-black/10 to-black/30 dark:from-zinc-950" />
+        <div className="absolute inset-0 z-20 bg-gradient-to-t from-zinc-50 via-black/10 to-black/30 dark:from-zinc-950" />
 
         <div className="absolute inset-x-0 top-0 z-50 p-6 pointer-events-none">
           <div className="mx-auto max-w-6xl flex justify-between items-center pointer-events-auto mt-20">

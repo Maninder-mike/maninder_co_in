@@ -115,9 +115,9 @@ export function TravelVectorCover({ slug, className = "" }: VectorCoverProps) {
 
     return (
         <div
-            className={`relative flex items-center justify-center overflow-hidden h-full w-full ${className}`}
+            className={`absolute inset-0 flex items-center justify-center overflow-hidden ${className}`}
             style={{
-                background: `linear-gradient(135deg, ${theme.colors[0]}, ${theme.colors[1]}, ${theme.colors[2]})`
+                backgroundImage: `linear-gradient(135deg, ${theme.colors[0]}, ${theme.colors[1]}, ${theme.colors[2]})`
             }}
         >
             {/* Background patterns */}
