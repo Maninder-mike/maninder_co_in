@@ -5,7 +5,7 @@ import { loginAdmin } from "../actions/admin";
 
 export function AdminLoginForm() {
   const [state, formAction, isPending] = useActionState(
-    async (prevState: any, formData: FormData) => {
+    async (prevState: { error: string }, formData: FormData) => {
       return await loginAdmin(formData);
     },
     { error: "" }

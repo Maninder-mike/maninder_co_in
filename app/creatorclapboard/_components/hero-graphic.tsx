@@ -1,6 +1,6 @@
 "use client";
 
-import { Clapperboard, Film, Video } from "lucide-react";
+import { Clapperboard, Film } from "lucide-react";
 
 export function HeroGraphic() {
     return (

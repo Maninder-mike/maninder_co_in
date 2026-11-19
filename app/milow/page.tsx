@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { JsonLd } from "../_components/json-ld";
-import Image from "next/image";
-import { ArrowLeft, Shield, Truck, Vibrate, Zap, Monitor, Smartphone, Bell, CheckCircle2, Timer, FileX, EyeOff, BarChart3, TrendingUp, Terminal } from "lucide-react";
+import { Shield, Truck, Zap, Monitor, Smartphone, CheckCircle2, Timer, FileX, EyeOff, TrendingUp, Terminal } from "lucide-react";
 import { GithubIcon } from "../_components/social-icons";
 import { HeroImage } from "./_components/hero-image";
 import { BrandStrip } from "./_components/brand-strip";
@@ -114,7 +113,7 @@ export default function MilowPage() {
                             <div className="h-12 w-12 rounded-2xl bg-red-500/20 flex items-center justify-center">
                                 <FileX className="h-6 w-6 text-red-400" />
                             </div>
-                            <h3 className="text-2xl font-bold italic">"I lost the BOL."</h3>
+                            <h3 className="text-2xl font-bold italic">&quot;I lost the BOL.&quot;</h3>
                             <p className="text-zinc-400">
                                 Paperwork errors cause <span className="text-white font-medium">15% of payment delays</span>. Our driver-first scanner eliminates the friction before it hits the office.
                             </p>
@@ -123,7 +122,7 @@ export default function MilowPage() {
                             <div className="h-12 w-12 rounded-2xl bg-amber-500/20 flex items-center justify-center">
                                 <Timer className="h-6 w-6 text-amber-400" />
                             </div>
-                            <h3 className="text-2xl font-bold italic">"When do I get paid?"</h3>
+                            <h3 className="text-2xl font-bold italic">&quot;When do I get paid?&quot;</h3>
                             <p className="text-zinc-400">
                                 Manual settlements are slow. Milow automates the paperwork-to-payment pipeline, <span className="text-white font-medium">reducing days-to-pay by 60%</span>.
                             </p>
@@ -132,7 +131,7 @@ export default function MilowPage() {
                             <div className="h-12 w-12 rounded-2xl bg-blue-500/20 flex items-center justify-center">
                                 <EyeOff className="h-6 w-6 text-blue-400" />
                             </div>
-                            <h3 className="text-2xl font-bold italic">"Where's my driver?"</h3>
+                            <h3 className="text-2xl font-bold italic">&quot;Where&apos;s my driver?&quot;</h3>
                             <p className="text-zinc-400">
                                 Constant calls distract drivers. Our real-time command center provides <span className="text-white font-medium">100% visibility</span> without a single phone call.
                             </p>

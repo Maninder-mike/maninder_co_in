@@ -13,7 +13,7 @@ export function RunningStats() {
               Life on the Run
             </h2>
             <p className="mt-4 text-lg text-zinc-600 dark:text-zinc-400">
-              When I'm not writing code, I'm usually pounding the pavement. Here's a snapshot of my current training block.
+              When I&apos;m not writing code, I&apos;m usually pounding the pavement. Here&apos;s a snapshot of my current training block.
             </p>
           </div>
           

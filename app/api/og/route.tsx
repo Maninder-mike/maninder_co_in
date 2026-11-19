@@ -7,10 +7,10 @@ export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
 
-    // Dynamic params
-    const title = searchParams.get("title") || "Maninder Singh";
-    const description = searchParams.get("description") || "Software Engineer & Builder";
-    const category = searchParams.get("category") || "maninder.co.in";
+    // Dynamic params with length limits to prevent DoS/overflow
+    const title = (searchParams.get("title") || "Maninder Singh").slice(0, 100);
+    const description = (searchParams.get("description") || "Software Engineer & Builder").slice(0, 200);
+    const category = (searchParams.get("category") || "maninder.co.in").slice(0, 50);
 
     return new ImageResponse(
       (
@@ -144,7 +144,7 @@ export async function GET(req: NextRequest) {
         height: 630,
       }
     );
-  } catch (e: any) {
+  } catch (e: unknown) {
     console.error("OG Image generation failed:", e);
     return new Response(`Failed to generate the image`, {
       status: 500,

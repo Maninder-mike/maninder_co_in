@@ -40,7 +40,10 @@ export function getPosts(): BlogPost[] {
     return allPosts.sort((a, b) => (new Date(b.date).getTime() - new Date(a.date).getTime()));
 }
 
+const SAFE_SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
 export function getPostBySlug(slug: string): BlogPost | undefined {
+    if (!SAFE_SLUG.test(slug)) return undefined;
     const posts = getPosts();
     return posts.find((post) => post.slug === slug);
 }

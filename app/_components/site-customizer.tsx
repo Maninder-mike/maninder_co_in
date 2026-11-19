@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 import { Sun, Moon, Monitor } from "lucide-react";
 
 type ThemeMode = "light" | "dark" | "system";
@@ -17,18 +17,14 @@ function applyThemeToDOM(theme: ThemeMode) {
   }
 }
 
-export function SiteCustomizer() {
-  const [theme, setTheme] = useState<ThemeMode>("system");
-  const [mounted, setMounted] = useState(false);
+const emptySubscribe = () => () => {};
 
-  // On mount: read localStorage and apply immediately
-  useEffect(() => {
-    const storedTheme = localStorage.getItem("theme") as ThemeMode | null;
-    const initial = storedTheme ?? "system";
-    setTheme(initial);
-    applyThemeToDOM(initial);
-    setMounted(true);
-  }, []);
+export function SiteCustomizer() {
+  const [theme, setTheme] = useState<ThemeMode>(() => {
+    if (typeof window === "undefined") return "system";
+    return (localStorage.getItem("theme") as ThemeMode | null) ?? "system";
+  });
+  const mounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
 
   // When theme changes after mount: persist and apply
   useEffect(() => {

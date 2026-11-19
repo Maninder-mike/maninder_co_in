@@ -8,7 +8,7 @@ interface ProjectCardProps {
     isFeatured?: boolean;
 }
 
-export function ProjectCard({ project, className = "", isFeatured = false }: ProjectCardProps) {
+export function ProjectCard({ project, className = "" }: ProjectCardProps) {
     const iconMap: Record<string, React.ElementType> = {
         Truck,
         Globe,

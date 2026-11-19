@@ -43,7 +43,10 @@ export function getTravelLogs(): TravelLog[] {
     });
 }
 
+const SAFE_SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
 export function getTravelLogBySlug(slug: string): TravelLog | undefined {
+    if (!SAFE_SLUG.test(slug)) return undefined;
     const logs = getTravelLogs();
     return logs.find((log) => log.slug === slug);
 }

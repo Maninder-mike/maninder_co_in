@@ -7,14 +7,15 @@ export function proxy(request: NextRequest) {
   const isDev = process.env.NODE_ENV !== 'production';
   const cspHeader = `
     default-src 'self';
-    script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'unsafe-inline' va.vercel-scripts.com ${isDev ? "'unsafe-eval'" : ""};
-    style-src 'self' 'nonce-${nonce}' 'unsafe-inline';
-    img-src 'self' blob: data:;
-    font-src 'self' data:;
-    connect-src 'self' va.vercel-scripts.com *.supabase.co;
+    script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'unsafe-inline' va.vercel-scripts.com https://va.vercel-analytics.com ${isDev ? "'unsafe-eval'" : ""};
+    style-src 'self' 'nonce-${nonce}' 'unsafe-inline' https://fonts.googleapis.com;
+    img-src 'self' blob: data: https://play.google.com;
+    font-src 'self' data: https://fonts.gstatic.com;
+    connect-src 'self' va.vercel-scripts.com https://va.vercel-analytics.com *.supabase.co https://*.supabase.co;
     frame-ancestors 'none';
     base-uri 'self';
     form-action 'self';
+    object-src 'none';
   `.replace(/\s{2,}/g, ' ').trim();
 
   // Set the nonce in the request headers so it can be read in Server Components

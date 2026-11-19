@@ -6,41 +6,41 @@ import { getTravelLogBySlug, getTravelLogs } from "@/lib/travel";
 import { TravelCallout } from "../_components/travel-callout";
 import { TravelVectorCover } from "../_components/travel-vector-cover";
 import { SiteNav } from "../../_components/site-nav";
-import { SiteFooter } from "../../_components/site-footer";
 import { Plane, Bus, Train, Car, Ship, MapPin, Calendar, Clock, ChevronLeft, ChevronRight } from "lucide-react";
 import { ShareButton } from "../../_components/share-button";
 import { ReadingProgress } from "../../_components/reading-progress";
 
+type PropsWithChildren = { children?: React.ReactNode };
+
 const mdxComponents = {
     TravelCallout,
-    h2: ({ children }: any) => (
+    h2: ({ children }: PropsWithChildren) => (
         <h2 className="mt-16 mb-8 text-3xl font-black tracking-tight text-zinc-900 dark:text-zinc-100 first:mt-0">
             {children}
         </h2>
     ),
-    h3: ({ children }: any) => (
+    h3: ({ children }: PropsWithChildren) => (
         <h3 className="mt-10 mb-4 text-xl font-bold text-zinc-800 dark:text-zinc-200">
             {children}
         </h3>
     ),
-    p: ({ children }: any) => (
+    p: ({ children }: PropsWithChildren) => (
         <p className="mb-6 leading-relaxed text-zinc-600 dark:text-zinc-400 font-medium last:mb-0">
             {children}
         </p>
     ),
-    ul: ({ children }: any) => (
+    ul: ({ children }: PropsWithChildren) => (
         <div className="space-y-3 mb-6">{children}</div>
     ),
-    li: ({ children }: any) => (
+    li: ({ children }: PropsWithChildren) => (
         <div className="flex gap-3 pl-2">
             <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
             <p className="m-0 text-zinc-600 dark:text-zinc-400 font-medium">{children}</p>
         </div>
     ),
-    strong: ({ children }: any) => (
+    strong: ({ children }: PropsWithChildren) => (
         <strong className="font-bold text-zinc-900 dark:text-zinc-100">{children}</strong>
     ),
-    // Define special callouts if needed, or use standard markdown and handle in content
 };
 
 export async function generateStaticParams() {

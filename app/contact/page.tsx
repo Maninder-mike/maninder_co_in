@@ -54,7 +54,7 @@ export default function ContactPage() {
               Available for new projects
             </div>
             <h1 className="text-4xl font-black tracking-tighter sm:text-5xl lg:text-7xl">
-              Let's build{' '}
+              Let&apos;s build{' '}
               <br className="hidden sm:block" />
               <span className="text-zinc-400 dark:text-zinc-600">something together.</span>
             </h1>

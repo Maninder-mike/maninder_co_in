@@ -1,5 +1,4 @@
-
-import { Truck, Shield, Zap, CheckCircle2, TrendingUp, Bell } from "lucide-react";
+import { Shield, Zap, CheckCircle2, TrendingUp, Bell } from "lucide-react";
 
 export function BrandStrip() {
     return (

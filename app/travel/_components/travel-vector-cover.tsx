@@ -1,16 +1,12 @@
 import type React from "react";
 import {
-    Plane,
     Palmtree,
     Mountain,
     Trees,
     Building2,
     Landmark,
-    Waves,
     Sun,
     Map,
-    Ship,
-    Train,
     Wind
 } from "lucide-react";
 

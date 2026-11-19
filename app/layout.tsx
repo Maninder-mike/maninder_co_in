@@ -28,6 +28,9 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://maninder.co.in"),
+  alternates: {
+    canonical: "./",
+  },
   title: "Maninder | Mobile Dev, Traveler & Runner",
   description:
     "Portfolio of Maninder – iOS & Android developer, world traveler, runner. Projects, journeys and upcoming experiments.",

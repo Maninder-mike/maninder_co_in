@@ -42,7 +42,7 @@ function createParticle(x: number, y: number): HTMLDivElement {
 
   let posX = x;
   let posY = y;
-  let velocityX = vx;
+  const velocityX = vx;
   let velocityY = vy;
   let opacity = 1;
 

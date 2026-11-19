@@ -4,7 +4,6 @@ import {
     ArrowLeft,
     ScrollText,
     Video,
-    Monitor,
     ShieldAlert,
     Ban,
     Scale,
@@ -116,7 +115,7 @@ const sections = [
         icon: Ban,
         content: (
             <p>
-                We reserve the right to suspend or terminate access to the App's premium or cloud features for any user $who breaches these Terms.
+                We reserve the right to suspend or terminate access to the App&apos;s premium or cloud features for any user who breaches these Terms.
             </p>
         )
     },

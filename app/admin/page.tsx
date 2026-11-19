@@ -1,16 +1,10 @@
 import { cookies } from "next/headers";
 import { AdminLoginForm } from "./login-form";
 import { logoutAdmin } from "../actions/admin";
+import { isValidSession } from "@/lib/auth";
 import { createClient } from "@supabase/supabase-js";
 import { formatDistanceToNow } from "date-fns";
 import { SiteNav } from "../_components/site-nav";
-
-// We can bypass RLS since we are server side with the service role key,
-// but for security it's best to always just use the service role for admin tasks.
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 export const metadata = {
   title: "Admin Dashboard | Maninder",
@@ -22,11 +16,17 @@ export const metadata = {
 
 export default async function AdminPage() {
   const cookieStore = await cookies();
-  const isAdmin = cookieStore.get("admin_session")?.value === "true";
+  const sessionCookie = cookieStore.get("admin_session")?.value;
+  const isAdmin = isValidSession(sessionCookie);
 
   if (!isAdmin) {
     return <AdminLoginForm />;
   }
+
+  // Create request-scoped client for authenticated admin queries
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+  const supabase = createClient(supabaseUrl, supabaseKey);
 
   // Fetch recent messages
   const { data: messages } = await supabase

@@ -232,7 +232,7 @@ export default function CreatorClapboardPage() {
                             </div>
                             <h3 className="text-4xl font-bold tracking-tight">Your Data Stays on Your Phone</h3>
                             <p className="text-xl text-zinc-600 dark:text-zinc-400">
-                                We don't collect anything. <span className="font-semibold text-zinc-900 dark:text-zinc-100">No accounts, no tracking, no internet access.</span> Your production data stays on your phone.
+                                We don&apos;t collect anything. <span className="font-semibold text-zinc-900 dark:text-zinc-100">No accounts, no tracking, no internet access.</span> Your production data stays on your phone.
                             </p>
                             <div className="grid gap-6 sm:grid-cols-2">
                                 {[
